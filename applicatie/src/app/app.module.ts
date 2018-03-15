@@ -16,6 +16,7 @@ import { DownloadsComponent } from './components/downloads/downloads.component';
 
 const appRoutes: Routes = [
   {path:'', component: HomeComponent},
+  {path:'home', component: HomeComponent},
   {path:'about', component: AboutComponent},
   {path:'nieuws', component: NieuwsComponent},
   {path:'links', component: LinksComponent},
