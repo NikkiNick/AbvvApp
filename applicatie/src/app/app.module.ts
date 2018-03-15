@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 
 import { AppComponent } from './app.component';
@@ -13,7 +14,15 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { LinksComponent } from './components/links/links.component';
 import { DownloadsComponent } from './components/downloads/downloads.component';
 
-
+const appRoutes: Routes = [
+  {path:'', component: HomeComponent},
+  {path:'about', component: AboutComponent},
+  {path:'nieuws', component: NieuwsComponent},
+  {path:'links', component: LinksComponent},
+  {path:'downloads', component: DownloadsComponent},
+  {path: '404', component: PageNotFoundComponent},
+  {path: '**', redirectTo: '/404'}
+];
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +37,8 @@ import { DownloadsComponent } from './components/downloads/downloads.component';
     DownloadsComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]
