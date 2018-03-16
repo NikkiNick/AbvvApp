@@ -1,6 +1,12 @@
 <div class="ui message">
     <div class="header">Nieuws...</div>
     <div class="ui hidden divider"></div>
-    Welkom op de nieuwspagina van Abvv Aviation.
-  </div>
+    Welkom op de nieuwspagina van Abvv Aviation.<br>
+    <a (click)="toggleForm()" id='formToggle'>Nieuwsbericht toevoegen</a>
+</div>
+<div class="ui message" id="form">
+  <app-nieuws-toevoegen (nieuwsbericht)="voegNieuwsBerichtToe($event)"></app-nieuws-toevoegen>
+</div>
+<app-nieuwsbericht *ngFor="let nbericht of nieuwsBerichten" [nieuwsbericht]='nbericht'></app-nieuwsbericht>
+
   
