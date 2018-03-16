@@ -1,12 +1,14 @@
 import { User } from '../classes/user';
 export class Nieuwsbericht {
+    private _id: number;
     private _titel: string;
     private _bericht: string;
     private _toegevoegdOp: Date;
     private _toegevoegdDoor: string;
 
     ///CONSTRUCTOR
-    constructor(titel: string, bericht: string, user: string){
+    constructor(id: number, titel: string, bericht: string, user: string){
+        this._id = id;
         this._titel = titel;
         this._bericht = bericht;
         this._toegevoegdOp = new Date();
@@ -14,6 +16,9 @@ export class Nieuwsbericht {
     }
 
     ///GETTERS
+    get id(): number{
+        return this._id;
+    }
     get titel(): string{
         return this._titel;
     }

@@ -3,6 +3,6 @@
   <p>{{nieuwsbericht.bericht}}</p>
   <p>Toegevoegd op {{nieuwsbericht.toegevoegdOp | date: "dd/MM/yyyy"}} door {{nieuwsbericht.toegevoegdDoor}}</p>
   <div>
-    <button class="ui mini red  button" >Verwijder nieuwsbericht</button>
+    <button class="ui mini red  button" (click)='verwijderNieuwsbericht(nieuwsbericht)'>Verwijder nieuwsbericht</button>
   </div>
 </div>

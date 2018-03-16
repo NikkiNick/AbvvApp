@@ -16,12 +16,13 @@ import { DownloadsComponent } from './components/downloads/downloads.component';
 import { NieuwsToevoegenComponent } from './components/nieuws/nieuws-toevoegen/nieuws-toevoegen.component';
 import { NieuwsberichtComponent } from './components/nieuws/nieuwsbericht/nieuwsbericht.component';
 
+import { NieuwsDataService } from './services/nieuws-data.service';
+
 const appRoutes: Routes = [
   {path:'', component: HomeComponent},
   {path:'home', component: HomeComponent},
   {path:'about', component: AboutComponent},
   {path:'nieuws', component: NieuwsComponent},
-  {path: 'nieuws/toevoegen', component: NieuwsToevoegenComponent},
   {path:'links', component: LinksComponent},
   {path:'downloads', component: DownloadsComponent},
   {path: '404', component: PageNotFoundComponent},
@@ -46,7 +47,7 @@ const appRoutes: Routes = [
     BrowserModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [NieuwsDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

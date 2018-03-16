@@ -1,6 +1,6 @@
 main{
-    border-top: 1px solid rgb(243, 60, 60);
-    border-bottom: 1px solid rgb(243, 60, 60);
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
     background-color: rgb(255, 231, 231);
     margin-top: 10px;
     width: 100%;

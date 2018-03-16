@@ -1,33 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Nieuwsbericht } from '../../classes/nieuwsbericht';
+import { NieuwsDataService } from '../../services/nieuws-data.service';
 
 @Component({
   selector: 'app-nieuws',
   templateUrl: './nieuws.component.html',
-  styleUrls: ['./nieuws.component.css']
+  styleUrls: ['./nieuws.component.css'],
+  providers: []
 })
 export class NieuwsComponent implements OnInit {
 
-  private _nieuwsberichten = new Array<Nieuwsbericht>();
   private _toevoegenStatus = false;
+  private _isEmpty: boolean;
 
-  constructor() { 
-    let nieuwsbericht1: Nieuwsbericht = new Nieuwsbericht("Titel nieuwsbericht 1", "Dit is de inhoud van nieuwsbericht 1","Nick");
-    let nieuwsbericht2: Nieuwsbericht = new Nieuwsbericht("Titel nieuwsbericht 2", "Dit is de inhoud van nieuwsbericht 2","Nick");
-    this.voegNieuwsBerichtToe(nieuwsbericht1);
-    this.voegNieuwsBerichtToe(nieuwsbericht2);
+  constructor(private _nieuwsDataService: NieuwsDataService){
+    this._isEmpty = this._nieuwsDataService.isEmpty();
+  }
+  get isEmpty(): boolean{
+    return this._isEmpty;
+   
+  }
+  get nieuwsBerichten(): Nieuwsbericht[]{
+    return this._nieuwsDataService.nieuwsBerichten;
+  }
+  voegNieuwsberichtToe(nieuwsbericht){
+
+    this._nieuwsDataService.voegNieuwsberichtToe(nieuwsbericht);
+  }
+  verwijderNieuwsbericht(nieuwsbericht){
+    this._nieuwsDataService.verwijderNieuwsbericht(nieuwsbericht);
   }
 
   ngOnInit() {
     document.getElementById("form").style.display = "none";
-  }
-
-  get nieuwsBerichten(): Nieuwsbericht[]{
-    return this._nieuwsberichten;
-  }
-  voegNieuwsBerichtToe(nieuwsbericht){
-    this._nieuwsberichten.push(nieuwsbericht);
-    console.log(nieuwsbericht+'\nTOEGEVOEGD');
   }
   toggleForm(){
     if(this._toevoegenStatus == false){
