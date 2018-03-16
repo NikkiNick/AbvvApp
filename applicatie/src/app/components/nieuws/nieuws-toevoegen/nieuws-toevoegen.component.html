@@ -1,8 +1,8 @@
-
-<div class="header">Nieuwsbericht toevoegen...</div>
-<div class="ui hidden divider"></div>
-Gebruik onderstaand formulier om een nieuwsbericht toe te voegen.
-<div class="ui small form segment"> 
+<div class="ui top attached message overzicht">
+    <div class="ui tiny header">Nieuwsbericht toevoegen</div>
+</div>
+<div class="ui form attached message"> 
+   <p>Gebruik onderstaand formulier om een nieuwsbericht toe te voegen.</p>
     <div class="field">
       <label for="titel">Titel:</label> 
       <input id="titel" name="titel" #titel>
@@ -11,9 +11,10 @@ Gebruik onderstaand formulier om een nieuwsbericht toe te voegen.
         <label for="bericht">Bericht:</label> 
         <textarea id="bericht" name="bericht" #bericht></textarea>
     </div>
-  <div class="field">
-    <button class="ui green button" type="submit" (click)="voegNieuwsberichtToe(titel.value, bericht.value)">Toevoegen</button> 
-    <button class="ui red button" type="reset">Herstel</button>
-  </div>
+    <div class="field">
+      <button class="ui mini green button" type="submit" (click)="voegNieuwsberichtToe(titel.value, bericht.value)">Toevoegen</button> 
+      <button class="ui mini red button" type="reset">Herstel</button>
+    </div>
+</div>
   
   

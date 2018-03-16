@@ -1,5 +1,8 @@
 <div class="ui attached message">
-  <div class="ui header">Titel: {{nieuwsbericht.titel}}</div>
+  <h3 class="ui dividing header">{{nieuwsbericht.titel}}</h3>
   <p>{{nieuwsbericht.bericht}}</p>
-  Toegevoegd op {{nieuwsbericht.toegevoegdOp | date: "dd/MM/yyyy"}} door {{nieuwsbericht.toegevoegdDoor}}
+  <p>Toegevoegd op {{nieuwsbericht.toegevoegdOp | date: "dd/MM/yyyy"}} door {{nieuwsbericht.toegevoegdDoor}}</p>
+  <div>
+    <button class="ui mini red  button" >Verwijder nieuwsbericht</button>
+  </div>
 </div>

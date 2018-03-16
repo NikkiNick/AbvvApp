@@ -4,8 +4,10 @@
     Welkom op de nieuwspagina van Abvv Aviation.<br>
     <a (click)="toggleForm()" id='formToggle'>Nieuwsbericht toevoegen</a>
 </div>
-<div class="ui message" id="form">
-  <app-nieuws-toevoegen (nieuwsbericht)="voegNieuwsBerichtToe($event)"></app-nieuws-toevoegen>
+  <app-nieuws-toevoegen (nieuwsbericht)="voegNieuwsBerichtToe($event)" id='form'></app-nieuws-toevoegen>
+
+<div class="ui top attached message overzicht">
+  <div class="ui tiny header">Nieuwsberichten</div>
 </div>
 <app-nieuwsbericht *ngFor="let nbericht of nieuwsBerichten" [nieuwsbericht]='nbericht'></app-nieuwsbericht>
 
