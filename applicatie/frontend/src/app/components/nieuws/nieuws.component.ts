@@ -10,29 +10,29 @@ import { NieuwsDataService } from '../../services/nieuws-data.service';
 })
 export class NieuwsComponent implements OnInit {
 
+  private _nieuwsberichten: Nieuwsbericht[];
   private _toevoegenStatus = false;
   private _isEmpty: boolean;
 
   constructor(private _nieuwsDataService: NieuwsDataService){
     this._isEmpty = this._nieuwsDataService.isEmpty();
   }
+  ngOnInit() {
+    this._nieuwsDataService.nieuwsBerichten.subscribe(items => this._nieuwsberichten = items);
+    document.getElementById("form").style.display = "none";
+  }
   get isEmpty(): boolean{
     return this._isEmpty;
    
   }
-  get nieuwsBerichten(): Nieuwsbericht[]{
-    return this._nieuwsDataService.nieuwsBerichten;
+  get nieuwsBerichten(){
+    return this._nieuwsberichten;
   }
   voegNieuwsberichtToe(nieuwsbericht){
-
-    this._nieuwsDataService.voegNieuwsberichtToe(nieuwsbericht);
+    this._nieuwsDataService.voegNieuwsberichtToe(nieuwsbericht).subscribe(item => this._nieuwsberichten.push(item));
   }
   verwijderNieuwsbericht(nieuwsbericht){
     this._nieuwsDataService.verwijderNieuwsbericht(nieuwsbericht);
-  }
-
-  ngOnInit() {
-    document.getElementById("form").style.display = "none";
   }
   toggleForm(){
     if(this._toevoegenStatus == false){

@@ -1,35 +1,42 @@
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators';
+
 import { Nieuwsbericht } from '../classes/nieuwsbericht';
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class NieuwsDataService {
 
-  private _nieuwsberichten = new Array<Nieuwsbericht>();
+  private readonly _nieuwsApiUrl = "/API/nieuwsberichten";
 
-  constructor() {
-    let nieuwsbericht1 = new Nieuwsbericht(0, "Titel nieuwsbericht 1", "Dit is de inhoud van nieuwsbericht 1","Nick");
-    let nieuwsbericht2 = new Nieuwsbericht(1, "Titel nieuwsbericht 2", "Dit is de inhoud van nieuwsbericht 2","Nick");
-    this.voegNieuwsberichtToe(nieuwsbericht1);
-    this.voegNieuwsberichtToe(nieuwsbericht2);
+  constructor(private http: HttpClient) {
   }
 
-  get nieuwsBerichten(): Nieuwsbericht[]{
-    return this._nieuwsberichten;
+  get nieuwsBerichten(): Observable<Nieuwsbericht[]>{
+    return this.http
+              .get(this._nieuwsApiUrl)
+              .pipe(
+                map((list: any[]): Nieuwsbericht[] =>
+                        list.map(item => new Nieuwsbericht(item.titel, item.bericht, item.toegevoegdDoor))
+                )
+              );
   }
-  voegNieuwsberichtToe(nieuwsbericht){
-    this._nieuwsberichten.push(nieuwsbericht);
+  voegNieuwsberichtToe(nieuwsbericht): Observable<Nieuwsbericht> {
+    return this.http
+      .post(this._nieuwsApiUrl, nieuwsbericht)
+      .pipe(
+        map(
+          (item: any): Nieuwsbericht =>
+            new Nieuwsbericht(item.titel, item.bericht, item.toegevoegdDoor)
+        )
+      );
   }
+
   verwijderNieuwsbericht(id){
-    for(let i = 0; i < this._nieuwsberichten.length; i++){
-      if(this._nieuwsberichten[i].id == id){
-        this._nieuwsberichten.splice(i, 1);
-      }
-    }
+    //
   }
   isEmpty(): boolean{
-    if(this._nieuwsberichten.length == 0){
-      return true;
-    }
     return false;
   }
 

@@ -19,7 +19,6 @@ export class NieuwsberichtComponent implements OnInit {
   ngOnInit() {
   }
   verwijderNieuwsbericht(nieuwsbericht: Nieuwsbericht){
-    let id = nieuwsbericht.id;
-    this._nieuwsDataService.verwijderNieuwsbericht(id);
+    ///this._nieuwsDataService.verwijderNieuwsbericht(nieuwsbericht);
   }
 }

@@ -22,8 +22,7 @@ export class NieuwsToevoegenComponent implements OnInit {
   }
 
   voegNieuwsberichtToe(titel: string, bericht: string) : boolean {
-    let id = this._nieuwsDataService.nieuwsBerichten.length;
-    const nbericht = new Nieuwsbericht(id, titel, bericht, 'Nick');
+    const nbericht = new Nieuwsbericht(titel, bericht, 'Nick');
     this.nieuwsbericht.emit(nbericht);
     return false;
   }
