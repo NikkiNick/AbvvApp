@@ -18,7 +18,7 @@ export class NieuwsDataService {
               .get(this._nieuwsApiUrl)
               .pipe(
                 map((list: any[]): Nieuwsbericht[] =>
-                        list.map(item => new Nieuwsbericht(item.titel, item.bericht, item.toegevoegdDoor))
+                        list.map(item => new Nieuwsbericht(item.id, item.titel, item.bericht, item.toegevoegdDoor))
                 )
               );
   }
@@ -28,13 +28,17 @@ export class NieuwsDataService {
       .pipe(
         map(
           (item: any): Nieuwsbericht =>
-            new Nieuwsbericht(item.titel, item.bericht, item.toegevoegdDoor)
+            new Nieuwsbericht(item.id, item.titel, item.bericht, item.toegevoegdDoor)
         )
       );
   }
 
-  verwijderNieuwsbericht(id){
-    //
+  verwijderNieuwsbericht(nieuwsbericht: Nieuwsbericht): Observable<Nieuwsbericht>{
+    return this.http
+    .delete(`${this._nieuwsApiUrl}/${nieuwsbericht.id}`)
+    .pipe(
+      map((item: any): Nieuwsbericht => new Nieuwsbericht(item.id, item.titel, item.bericht, item.toegevoegdDoor) )
+    );
   }
   isEmpty(): boolean{
     return false;

@@ -9,9 +9,9 @@
 <div class="ui top attached message overzicht">
   <div class="ui tiny header">Nieuwsberichten</div>
 </div>
-<div class="ui attached message" *ngIf="nieuwsBerichten.length == 0">
+<div class="ui attached message" *ngIf="isEmpty">
   Er zijn geen nieuwsberichten
 </div>
-<app-nieuwsbericht *ngFor="let nbericht of nieuwsBerichten" [nieuwsbericht]='nbericht'></app-nieuwsbericht>
+<app-nieuwsbericht *ngFor="let nbericht of nieuwsBerichten" [nieuwsbericht]='nbericht' (deleteNieuwsbericht)='verwijderNieuwsbericht($event)'></app-nieuwsbericht>
 
   

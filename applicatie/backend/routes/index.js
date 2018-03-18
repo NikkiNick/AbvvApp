@@ -4,13 +4,29 @@ var router = express.Router();
 let mongoose = require('mongoose');
 let Nieuwsbericht = mongoose.model('Nieuwsbericht');
 
+//nieuwsbericht parameter
+router.param('nieuwsberichtID', function(req, res, next, id) {
+  let query = Nieuwsbericht.find({"id": id});
+  query.exec(function (err, nieuwsbericht){
+    if (err) { return next(err); }
+    if (!nieuwsbericht) { return next(new Error('not found ' + id)); }
+    req.nieuwsbericht = nieuwsbericht;
+    return next();
+  });
+});   
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.send("server works");
 });
 
-module.exports = router;
-
+//nieuwsbericht verwijderen
+router.delete('/API/nieuwsberichten/:nieuwsberichtID', function(req, res) {
+  req.nieuwsbericht.remove(function(err) {
+    if (err) { return next(err);}
+    res.json(req.nieuwsbericht);
+  });
+});
 //alle nieuwsberichten ophalen
 router.get('/API/nieuwsberichten/', function(req, res, next) {
   Nieuwsbericht.find(function(err, nieuwsberichten) {
@@ -18,7 +34,6 @@ router.get('/API/nieuwsberichten/', function(req, res, next) {
     res.json(nieuwsberichten);
   });
 });
-
 //nieuwsbericht plaatsen
 router.post('/API/nieuwsberichten/', function (req, res, next) {
   let nieuwsbericht = new Nieuwsbericht(req.body);
@@ -27,3 +42,5 @@ router.post('/API/nieuwsberichten/', function (req, res, next) {
     res.json(rec);
   });
 });  
+
+module.exports = router;

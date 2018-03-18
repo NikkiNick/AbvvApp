@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Nieuwsbericht } from '../../../classes/nieuwsbericht';
 import { NieuwsDataService } from '../../../services/nieuws-data.service';
 
@@ -11,14 +11,17 @@ import { NieuwsDataService } from '../../../services/nieuws-data.service';
 export class NieuwsberichtComponent implements OnInit {
 
   @Input() public nieuwsbericht: Nieuwsbericht;
+  @Output() public deleteNieuwsbericht = new EventEmitter<Nieuwsbericht>();
+
 
   constructor(private _nieuwsDataService: NieuwsDataService) {
     
    }
 
   ngOnInit() {
+  
   }
-  verwijderNieuwsbericht(nieuwsbericht: Nieuwsbericht){
-    ///this._nieuwsDataService.verwijderNieuwsbericht(nieuwsbericht);
+  verwijderNieuwsbericht(){
+    this.deleteNieuwsbericht.emit(this.nieuwsbericht);
   }
 }
