@@ -22,8 +22,7 @@ export class NieuwsToevoegenComponent implements OnInit {
   }
 
   voegNieuwsberichtToe(titel: string, bericht: string) : boolean {
-    let counter = 0;
-    const nbericht = new Nieuwsbericht(counter, titel, bericht, 'Nick');
+    const nbericht = new Nieuwsbericht(titel, bericht, 'Nick');
     this.nieuwsbericht.emit(nbericht);
     return false;
   }

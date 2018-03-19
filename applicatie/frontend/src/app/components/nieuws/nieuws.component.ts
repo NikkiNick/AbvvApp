@@ -13,7 +13,6 @@ export class NieuwsComponent implements OnInit {
 
   private _nieuwsberichten: Nieuwsbericht[];
   private _toevoegenStatus = false;
-  private _isEmpty: boolean;
 
   constructor(private _nieuwsDataService: NieuwsDataService){
     
@@ -21,28 +20,29 @@ export class NieuwsComponent implements OnInit {
   ngOnInit() {
     this._nieuwsDataService.nieuwsBerichten.subscribe(items => this._nieuwsberichten = items);
     document.getElementById("form").style.display = "none";
-    if(this._nieuwsberichten.length == 0){
-      this._isEmpty = true;
-    }
-    else{ this._isEmpty = false;}
   }
   get isEmpty(): boolean{
-    return this._isEmpty;
+    if(this._nieuwsberichten == null){
+      return true;
+    }
+    else{ 
+      if(this._nieuwsberichten.length == 0){
+        return true;
+      }
+    }
+    return false;
    
   }
   get nieuwsBerichten(){
     return this._nieuwsberichten;
   }
   voegNieuwsberichtToe(nieuwsbericht){
+    
     this._nieuwsDataService.voegNieuwsberichtToe(nieuwsbericht).subscribe(item => this._nieuwsberichten.push(item));
   }
-  verwijderNieuwsbericht(nieuwsbericht: Nieuwsbericht){
+  verwijderNieuwsbericht(nieuwsbericht){
     this._nieuwsDataService.verwijderNieuwsbericht(nieuwsbericht).subscribe(
-      item => (this._nieuwsberichten = this._nieuwsberichten.filter(val => item.id !== val.id)),
-      (error: HttpErrorResponse) => {
-        ///this.errorMsg = 'Error ${error.status} while removing nieuwsbericht for ${nieuwsbericht.titel}: ${error.error}';
-      }
-      
+      item => (this._nieuwsberichten = this._nieuwsberichten.filter(val => item.id !== val.id))  
     );
   }
   toggleForm(){

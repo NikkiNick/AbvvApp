@@ -6,7 +6,7 @@ let Nieuwsbericht = mongoose.model('Nieuwsbericht');
 
 //nieuwsbericht parameter
 router.param('nieuwsberichtID', function(req, res, next, id) {
-  let query = Nieuwsbericht.find({"id": id});
+  let query = Nieuwsbericht.findById(id);
   query.exec(function (err, nieuwsbericht){
     if (err) { return next(err); }
     if (!nieuwsbericht) { return next(new Error('not found ' + id)); }
@@ -21,21 +21,22 @@ router.get('/', function(req, res, next) {
 });
 
 //nieuwsbericht verwijderen
-router.delete('/API/nieuwsberichten/:nieuwsberichtID', function(req, res) {
+router.delete('/API/nieuws/:nieuwsberichtID', function(req, res) {
   req.nieuwsbericht.remove(function(err) {
     if (err) { return next(err);}
     res.json(req.nieuwsbericht);
   });
 });
 //alle nieuwsberichten ophalen
-router.get('/API/nieuwsberichten/', function(req, res, next) {
-  Nieuwsbericht.find(function(err, nieuwsberichten) {
+router.get('/API/nieuws', function(req, res, next) {
+  let query = Nieuwsbericht.find();
+  query.exec(function(err, nieuwsberichten) {
     if (err) { return next(err); }
     res.json(nieuwsberichten);
   });
 });
 //nieuwsbericht plaatsen
-router.post('/API/nieuwsberichten/', function (req, res, next) {
+router.post('/API/nieuws', function (req, res, next) {
   let nieuwsbericht = new Nieuwsbericht(req.body);
   nieuwsbericht.save(function(err, rec) {
     if (err){ return next(err); }

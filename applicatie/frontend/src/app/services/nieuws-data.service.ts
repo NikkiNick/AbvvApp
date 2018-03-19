@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class NieuwsDataService {
 
-  private readonly _nieuwsApiUrl = "/API/nieuwsberichten";
+  private readonly _nieuwsApiUrl = "/API/nieuws/";
 
   constructor(private http: HttpClient) {
   }
@@ -18,27 +18,21 @@ export class NieuwsDataService {
               .get(this._nieuwsApiUrl)
               .pipe(
                 map((list: any[]): Nieuwsbericht[] =>
-                        list.map(item => new Nieuwsbericht(item.id, item.titel, item.bericht, item.toegevoegdDoor))
+                        list.map(Nieuwsbericht.fromJSON)
                 )
               );
   }
+  
   voegNieuwsberichtToe(nieuwsbericht): Observable<Nieuwsbericht> {
     return this.http
       .post(this._nieuwsApiUrl, nieuwsbericht)
-      .pipe(
-        map(
-          (item: any): Nieuwsbericht =>
-            new Nieuwsbericht(item.id, item.titel, item.bericht, item.toegevoegdDoor)
-        )
-      );
+      .pipe(map(Nieuwsbericht.fromJSON));
   }
 
   verwijderNieuwsbericht(nieuwsbericht: Nieuwsbericht): Observable<Nieuwsbericht>{
     return this.http
     .delete(`${this._nieuwsApiUrl}/${nieuwsbericht.id}`)
-    .pipe(
-      map((item: any): Nieuwsbericht => new Nieuwsbericht(item.id, item.titel, item.bericht, item.toegevoegdDoor) )
-    );
+    .pipe(map(Nieuwsbericht.fromJSON));
   }
   isEmpty(): boolean{
     return false;

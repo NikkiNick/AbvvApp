@@ -1,15 +1,13 @@
 import { User } from '../classes/user';
 export class Nieuwsbericht {
-
-    private _id: Number;
+    private _id: string;
     private _titel: string;
     private _bericht: string;
     private _toegevoegdOp: Date;
     private _toegevoegdDoor: string;
 
     ///CONSTRUCTOR
-    constructor(id: Number, titel: string, bericht: string, user: string){
-        this._id = id;
+    constructor(titel: string, bericht: string, user: string){
         this._titel = titel;
         this._bericht = bericht;
         this._toegevoegdOp = new Date();
@@ -17,7 +15,7 @@ export class Nieuwsbericht {
     }
 
     ///GETTERS
-    get id(): Number{
+    get id(): string{
         return this._id;
     }
     get titel(): string{
@@ -35,12 +33,17 @@ export class Nieuwsbericht {
 
      toJSON(){
         return {
-            id: this._id,
+            _id: this._id,
             titel: this._titel,
             bericht: this._bericht,
             toegevoegdOp: this._toegevoegdOp,
             toegevoegdDoor: this._toegevoegdDoor
         }
+    }
+    static fromJSON(json: any): Nieuwsbericht {
+        const rec = new Nieuwsbericht(json.titel, json.bericht, json.toegevoegdDoor);
+        rec._id = json._id;
+        return rec;
     }
 
 }
