@@ -12,6 +12,6 @@
 <div class="ui attached message" *ngIf="isEmpty">
   Er zijn geen nieuwsberichten
 </div>
-<app-nieuwsbericht *ngFor="let nbericht of nieuwsBerichten" [nieuwsbericht]='nbericht' (deleteNieuwsbericht)='verwijderNieuwsbericht($event)'></app-nieuwsbericht>
+<app-nieuwsbericht *ngFor="let nbericht of nieuwsBerichten" [nieuwsbericht]='nbericht' (deleteNieuwsbericht)='verwijderNieuwsbericht($event)' (changeNieuwsbericht)='wijzigNieuwsbericht($event)'></app-nieuwsbericht>
 
   

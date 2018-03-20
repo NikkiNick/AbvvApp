@@ -22,7 +22,12 @@ export class NieuwsDataService {
                 )
               );
   }
-  
+
+  getNieuwsbericht(id: string): Observable<Nieuwsbericht>{
+    return this.http
+      .get(`${this._nieuwsApiUrl}/${id}`)
+      .pipe(map(Nieuwsbericht.fromJSON));
+  }
   voegNieuwsberichtToe(nieuwsbericht): Observable<Nieuwsbericht> {
     return this.http
       .post(this._nieuwsApiUrl, nieuwsbericht)
@@ -31,7 +36,7 @@ export class NieuwsDataService {
 
   verwijderNieuwsbericht(nieuwsbericht: Nieuwsbericht): Observable<Nieuwsbericht>{
     return this.http
-    .delete(`${this._nieuwsApiUrl}/${nieuwsbericht.id}`)
+    .delete(`${this._nieuwsApiUrl}verwijder/${nieuwsbericht.id}`)
     .pipe(map(Nieuwsbericht.fromJSON));
   }
   isEmpty(): boolean{

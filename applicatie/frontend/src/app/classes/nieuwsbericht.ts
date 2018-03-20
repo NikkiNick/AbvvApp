@@ -33,7 +33,7 @@ export class Nieuwsbericht {
 
      toJSON(){
         return {
-            _id: this._id,
+            id: this._id,
             titel: this._titel,
             bericht: this._bericht,
             toegevoegdOp: this._toegevoegdOp,
@@ -41,7 +41,8 @@ export class Nieuwsbericht {
         }
     }
     static fromJSON(json: any): Nieuwsbericht {
-        const rec = new Nieuwsbericht(json.titel, json.bericht, json.toegevoegdDoor);
+        let rec = new Nieuwsbericht(json.titel, json.bericht, json.toegevoegdDoor);
+        rec._toegevoegdOp = json.toegevoegdOp;
         rec._id = json._id;
         return rec;
     }

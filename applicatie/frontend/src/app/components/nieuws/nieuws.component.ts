@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Nieuwsbericht } from '../../classes/nieuwsbericht';
 import { NieuwsDataService } from '../../services/nieuws-data.service';
 import { HttpErrorResponse } from '@angular/common/http';

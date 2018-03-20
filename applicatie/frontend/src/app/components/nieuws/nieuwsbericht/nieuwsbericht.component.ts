@@ -12,10 +12,12 @@ export class NieuwsberichtComponent implements OnInit {
 
   @Input() public nieuwsbericht: Nieuwsbericht;
   @Output() public deleteNieuwsbericht = new EventEmitter<Nieuwsbericht>();
+  @Output() public changeNieuwsbericht = new EventEmitter<Nieuwsbericht>();
 
 
   constructor(private _nieuwsDataService: NieuwsDataService) {
     
+   
    }
 
   ngOnInit() {
@@ -24,4 +26,8 @@ export class NieuwsberichtComponent implements OnInit {
   verwijderNieuwsbericht(){
     this.deleteNieuwsbericht.emit(this.nieuwsbericht);
   }
+  wijzigNieuwsbericht(){
+    this.changeNieuwsbericht.emit(this.nieuwsbericht);
+  }
+
 }

@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
@@ -18,12 +19,14 @@ import { NieuwsToevoegenComponent } from './components/nieuws/nieuws-toevoegen/n
 import { NieuwsberichtComponent } from './components/nieuws/nieuwsbericht/nieuwsbericht.component';
 
 import { NieuwsDataService } from './services/nieuws-data.service';
+import { NieuwsAanpassenComponent } from './components/nieuws/nieuws-aanpassen/nieuws-aanpassen.component';
+import { NieuwsberichtDetailComponent } from './components/nieuws/nieuwsbericht-detail/nieuwsbericht-detail.component';
+import { NieuwsModule } from './components/nieuws/nieuws-module';
 
 const appRoutes: Routes = [
   {path:'', component: HomeComponent},
   {path:'home', component: HomeComponent},
   {path:'about', component: AboutComponent},
-  {path:'nieuws', component: NieuwsComponent},
   {path:'links', component: LinksComponent},
   {path:'downloads', component: DownloadsComponent},
   {path: '404', component: PageNotFoundComponent},
@@ -37,19 +40,18 @@ const appRoutes: Routes = [
     UserComponent,
     AboutComponent,
     HomeComponent,
-    NieuwsComponent,
     PageNotFoundComponent,
     LinksComponent,
     DownloadsComponent,
-    NieuwsToevoegenComponent,
-    NieuwsberichtComponent
   ],
   imports: [
+    NieuwsModule,
     BrowserModule,
     HttpClientModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [NieuwsDataService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

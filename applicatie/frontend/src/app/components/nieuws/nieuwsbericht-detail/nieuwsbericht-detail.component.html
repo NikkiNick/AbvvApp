@@ -1,0 +1,12 @@
+<div class="ui top attached message overzicht">
+  <div class="ui tiny header">{{nieuwsbericht.titel}}</div>
+</div>
+<div class="ui attached message">
+    <p>{{nieuwsbericht.id}}</p>
+    <p>{{nieuwsbericht.bericht}}</p>
+    <p>Toegevoegd op {{nieuwsbericht.toegevoegdOp | date: "dd/MM/yyyy"}} door {{nieuwsbericht.toegevoegdDoor}}</p>
+    <div>
+      <a class="ui mini red  button" (click)='verwijderNieuwsbericht()' routerLink="/nieuws">Verwijder nieuwsbericht</a>
+      <a class="ui mini orange button" [routerLink]="['/nieuws/wijzig/', nieuwsbericht.id]">Wijzig nieuwsbericht</a>
+    </div>
+</div>

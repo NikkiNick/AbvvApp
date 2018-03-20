@@ -21,7 +21,7 @@ router.get('/', function(req, res, next) {
 });
 
 //nieuwsbericht verwijderen
-router.delete('/API/nieuws/:nieuwsberichtID', function(req, res) {
+router.delete('/API/nieuws/verwijder/:nieuwsberichtID', function(req, res) {
   req.nieuwsbericht.remove(function(err) {
     if (err) { return next(err);}
     res.json(req.nieuwsbericht);
@@ -34,6 +34,9 @@ router.get('/API/nieuws', function(req, res, next) {
     if (err) { return next(err); }
     res.json(nieuwsberichten);
   });
+});
+router.get('/API/nieuws/:nieuwsberichtID', function(req, res, next) {
+  res.json(req.nieuwsbericht);
 });
 //nieuwsbericht plaatsen
 router.post('/API/nieuws', function (req, res, next) {

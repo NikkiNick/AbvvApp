@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Nieuwsbericht } from '../../../classes/nieuwsbericht';
 import { NieuwsDataService } from '../../../services/nieuws-data.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -11,19 +12,21 @@ import { NieuwsDataService } from '../../../services/nieuws-data.service';
 })
 export class NieuwsToevoegenComponent implements OnInit {
 
+  private nieuwsberichtForm: FormGroup;
 
   @Output() public nieuwsbericht = new EventEmitter<Nieuwsbericht>();
 
-  constructor(private _nieuwsDataService: NieuwsDataService){
+  constructor(private _nieuwsDataService: NieuwsDataService, private fb: FormBuilder){
     
   }
   ngOnInit(){
-
+    this.nieuwsberichtForm = this.fb.group({
+      titel: ['', [Validators.required]],
+      bericht: ['', [Validators.required]]
+    })
   }
-
-  voegNieuwsberichtToe(titel: string, bericht: string) : boolean {
-    const nbericht = new Nieuwsbericht(titel, bericht, 'Nick');
+  onSubmit(){
+    const nbericht = new Nieuwsbericht(this.nieuwsberichtForm.value.titel, this.nieuwsberichtForm.value.bericht, 'Nick');
     this.nieuwsbericht.emit(nbericht);
-    return false;
   }
 }
