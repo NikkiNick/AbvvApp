@@ -15,8 +15,7 @@ import { Routes, RouterModule } from "@angular/router";
 const nieuwsRoutes: Routes = [
     {path: 'nieuws', component: NieuwsComponent},
     {path: 'nieuws/wijzig/:nieuwsberichtID', component: NieuwsAanpassenComponent},
-    {path: 'nieuws/:nieuwsberichtID', component: NieuwsberichtDetailComponent},
-    {path: '**', redirectTo: '/404'}
+    {path: 'nieuws/:nieuwsberichtID', component: NieuwsberichtDetailComponent}
 ];
 
 @NgModule({
