@@ -16,10 +16,9 @@ export class NieuwsberichtDetailComponent implements OnInit {
   constructor(private nds: NieuwsDataService, private route: ActivatedRoute) { 
 
   }
-  ngOnInit(){
-
-    this.route.paramMap.subscribe(pa => 
-      this.nds.getNieuwsbericht(pa.get('nieuwsberichtID')).subscribe(item => this._nieuwsbericht = item));
+  ngOnInit() {
+    this.route.data.subscribe(item => 
+      this._nieuwsbericht = item['nieuwsbericht']);
   }
 
   verwijderNieuwsbericht(){
