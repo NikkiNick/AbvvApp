@@ -11,17 +11,21 @@ import { Observable } from 'rxjs/Observable';
 })
 export class NieuwsberichtDetailComponent implements OnInit {
 
-  private nieuwsbericht: Nieuwsbericht;
+  private _nieuwsbericht: Nieuwsbericht;
 
   constructor(private nds: NieuwsDataService, private route: ActivatedRoute) { 
-    this.route.paramMap.subscribe(pa =>
-       this.nds.getNieuwsbericht(pa.get("nieuwsberichtID")).subscribe(item => this.nieuwsbericht=item));
+
   }
   ngOnInit(){
 
+    this.route.paramMap.subscribe(pa => 
+      this.nds.getNieuwsbericht(pa.get('nieuwsberichtID')).subscribe(item => this._nieuwsbericht = item));
   }
 
   verwijderNieuwsbericht(){
-    this.nds.verwijderNieuwsbericht(this.nieuwsbericht).subscribe();
+    this.nds.verwijderNieuwsbericht(this._nieuwsbericht).subscribe();
+  }
+  get nieuwsbericht(){
+    return this._nieuwsbericht;
   }
 }

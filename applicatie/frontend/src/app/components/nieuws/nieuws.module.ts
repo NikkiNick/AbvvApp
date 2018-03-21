@@ -10,12 +10,13 @@ import { NieuwsberichtComponent } from "./nieuwsbericht/nieuwsbericht.component"
 import { NieuwsAanpassenComponent } from "./nieuws-aanpassen/nieuws-aanpassen.component";
 import { NieuwsberichtDetailComponent } from "./nieuwsbericht-detail/nieuwsbericht-detail.component";
 import { NieuwsDataService } from "../../services/nieuws-data.service";
+import { NieuwsberichtResolver } from "./nieuwsbericht-resolver";
 
 
 const nieuwsRoutes: Routes = [
     {path: 'nieuws', component: NieuwsComponent},
     {path: 'nieuws/wijzig/:nieuwsberichtID', component: NieuwsAanpassenComponent},
-    {path: 'nieuws/:nieuwsberichtID', component: NieuwsberichtDetailComponent}
+    {path: 'nieuws/:nieuwsberichtID', component: NieuwsberichtDetailComponent, resolve: { nieuwsbericht: NieuwsberichtResolver}}
 ];
 
 @NgModule({
@@ -33,7 +34,8 @@ const nieuwsRoutes: Routes = [
         NieuwsberichtDetailComponent
       ],
     providers: [
-        NieuwsDataService
+        NieuwsDataService,
+        NieuwsberichtResolver
     ]
   })
 export class NieuwsModule {
