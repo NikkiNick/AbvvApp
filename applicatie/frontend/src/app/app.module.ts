@@ -15,7 +15,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { LinksComponent } from './components/links/links.component';
 import { DownloadsComponent } from './components/downloads/downloads.component';
 
-import { NieuwsberichtModule } from './modules/nieuwsbericht.module';
+import { NieuwsModule } from './components/nieuws/nieuws.module';
 
 const appRoutes: Routes = [
   {path:'', component: HomeComponent},
@@ -39,7 +39,7 @@ const appRoutes: Routes = [
     DownloadsComponent,
   ],
   imports: [
-    NieuwsberichtModule,
+    NieuwsModule,
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
