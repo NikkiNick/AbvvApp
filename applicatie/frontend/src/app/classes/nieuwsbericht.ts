@@ -31,6 +31,13 @@ export class Nieuwsbericht {
         return this._toegevoegdDoor;
     }
 
+    // SETTERS
+    set titel(ntitel: string){
+        this._titel = ntitel;
+    }
+    set bericht(nbericht: string){
+        this._bericht = nbericht;
+    }
      toJSON(){
         return {
             id: this._id,

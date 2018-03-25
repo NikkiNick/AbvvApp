@@ -39,6 +39,11 @@ export class NieuwsDataService {
     .delete(`${this._nieuwsApiUrl}verwijder/${nieuwsbericht.id}`)
     .pipe(map(Nieuwsbericht.fromJSON));
   }
+  pasNieuwsberichtAan(nieuwsbericht: Nieuwsbericht): Observable<Nieuwsbericht>{
+    return this.http
+    .put(`${this._nieuwsApiUrl}wijzig/${nieuwsbericht.id}`, nieuwsbericht)
+    .pipe(map(Nieuwsbericht.fromJSON));
+  }
   isEmpty(): boolean{
     return false;
   }

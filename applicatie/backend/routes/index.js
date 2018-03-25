@@ -15,36 +15,64 @@ router.param('nieuwsberichtID', function(req, res, next, id) {
   });
 });   
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.send("server works");
-});
+// DELETE REQUESTS
 
-//nieuwsbericht verwijderen
-router.delete('/API/nieuws/verwijder/:nieuwsberichtID', function(req, res) {
-  req.nieuwsbericht.remove(function(err) {
-    if (err) { return next(err);}
+  //nieuwsbericht verwijderen
+  router.delete('/API/nieuws/verwijder/:nieuwsberichtID', function(req, res) {
+    req.nieuwsbericht.remove(function(err) {
+      if (err) { return next(err);}
+      res.json(req.nieuwsbericht);
+    });
+  });
+
+
+
+
+// GET REQUESTS
+
+  // GET home pagina
+  router.get('/', function(req, res, next) {
+    res.send("server works");
+  });
+
+  // alle nieuwsberichten ophalen
+  router.get('/API/nieuws', function(req, res, next) {
+    let query = Nieuwsbericht.find();
+    query.exec(function(err, nieuwsberichten) {
+      if (err) { return next(err); }
+      res.json(nieuwsberichten);
+    });
+  });
+
+  // 1 nieuwsbericht ophalen
+  router.get('/API/nieuws/:nieuwsberichtID', function(req, res, next) {
     res.json(req.nieuwsbericht);
   });
-});
-//alle nieuwsberichten ophalen
-router.get('/API/nieuws', function(req, res, next) {
-  let query = Nieuwsbericht.find();
-  query.exec(function(err, nieuwsberichten) {
-    if (err) { return next(err); }
-    res.json(nieuwsberichten);
+
+
+
+// POST REQUESTS
+
+  //nieuwsbericht plaatsen
+  router.post('/API/nieuws', function (req, res, next) {
+    let nieuwsbericht = new Nieuwsbericht(req.body);
+    nieuwsbericht.save(function(err, rec) {
+      if (err){ return next(err); }
+      res.json(rec);
+    });
+  });  
+
+
+// PUT REQUESTS
+
+  // nieuwsbericht aanpassen
+  router.put('/API/nieuws/wijzig/:nieuwsberichtID', function(req, res) {
+    req.nieuwsbericht.titel = req.body.titel;
+    req.nieuwsbericht.bericht = req.body.bericht;
+    req.nieuwsbericht.save(function(err) {
+      if (err) { return next(err);}
+      res.json(req.nieuwsbericht);
+    });
   });
-});
-router.get('/API/nieuws/:nieuwsberichtID', function(req, res, next) {
-  res.json(req.nieuwsbericht);
-});
-//nieuwsbericht plaatsen
-router.post('/API/nieuws', function (req, res, next) {
-  let nieuwsbericht = new Nieuwsbericht(req.body);
-  nieuwsbericht.save(function(err, rec) {
-    if (err){ return next(err); }
-    res.json(rec);
-  });
-});  
 
 module.exports = router;

@@ -1,0 +1,12 @@
+.overzicht{
+    background-color: #db2828;
+}
+.overzicht div{
+    color: white;
+}
+.ng-invalid:not(form) {
+    border-left: 5px solid #a94442 !important; 
+  }
+  .ng-valid:not(form) {
+    border-left: 5px solid #5aa942 !important; 
+  }

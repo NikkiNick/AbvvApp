@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Nieuwsbericht } from '../../../classes/nieuwsbericht';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NieuwsDataService } from '../../../services/nieuws-data.service';
@@ -12,22 +12,47 @@ import { Observable } from 'rxjs/Observable';
 })
 export class NieuwsAanpassenComponent implements OnInit {
 
-  private nieuwsbericht: Nieuwsbericht;
+  private _nieuwsbericht: Nieuwsbericht;
+  private _orgineelNieuwsbericht: Nieuwsbericht;
   private nieuwsberichtForm: FormGroup;
   
   constructor(private nds: NieuwsDataService, private fb: FormBuilder, private route: ActivatedRoute) { 
-
-    this.route.paramMap.subscribe(pa =>
-      this.nds.getNieuwsbericht(pa.get("nieuwsberichtID")).subscribe(item => this.nieuwsbericht=item));
-    console.log(this.nieuwsbericht);
-    this.nieuwsberichtForm = this.fb.group({
-      titel: [this.nieuwsbericht.titel, [Validators.required]],
-      bericht: [this.nieuwsbericht.bericht, [Validators.required]]});
 
   }
 
   ngOnInit() {
 
-  }
+    document.getElementById("message").style.display = "none";
 
+    this.route.data.subscribe(item => 
+      this._nieuwsbericht = item['nieuwsbericht']);
+    this._orgineelNieuwsbericht = this._nieuwsbericht;
+
+    this.nieuwsberichtForm = this.fb.group({
+      titel: [this._nieuwsbericht.titel, [Validators.required]],
+      bericht: [this._nieuwsbericht.bericht, [Validators.required]]});
+  }
+  get nieuwsbericht(){
+    return this._nieuwsbericht;
+  }
+  onSubmit(){
+    this._nieuwsbericht.titel = this.nieuwsberichtForm.get('titel').value;
+    this._nieuwsbericht.bericht = this.nieuwsberichtForm.get('bericht').value;
+    this.nds.pasNieuwsberichtAan(this._nieuwsbericht).subscribe(sub => {
+      document.getElementById("message").style.display = "block"
+    });
+
+  }
+  onReset(){
+    this.nieuwsberichtForm.setValue({
+      titel: this._orgineelNieuwsbericht.titel,
+      bericht: this._orgineelNieuwsbericht.bericht
+    });
+  }
+  verwijderNieuwsbericht(){
+    this.nds.verwijderNieuwsbericht(this._nieuwsbericht).subscribe();
+  }
+  closeMessage(){
+    document.getElementById("message").style.display = "none";
+  }
 }
