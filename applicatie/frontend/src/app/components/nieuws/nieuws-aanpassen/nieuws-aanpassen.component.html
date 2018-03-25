@@ -4,7 +4,7 @@
 <div class="ui attached message"> 
     <form [formGroup]='nieuwsberichtForm' (ngSubmit)='onSubmit()' class="ui mini form">
         <p>Gebruik onderstaand formulier om een nieuwsbericht aan te passen.</p>
-        <div class="ui positive message" id="message">
+        <div class="ui positive message hidden" id="message">
             <i class="close icon" (click)="closeMessage()"></i>
             <div class="header">Nieuwsbericht succesvol aangepast.</div>
         </div>
@@ -18,7 +18,7 @@
         </div>
         <div class="field">
             <button class="ui mini green button" type="submit">Aanpassen</button> 
-            <button class="ui mini orange button" (click)="onReset()">Herstel</button>
+            <a  class="ui mini orange button" (click)="onReset()">Herstel</a>
             <button class="ui mini red button" (click)="verwijderNieuwsbericht()">Verwijder</button>
             <a href="nieuws/{{nieuwsbericht.id}}" class="ui mini blue button">Terug</a>
         </div>

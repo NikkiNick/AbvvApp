@@ -12,14 +12,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class NieuwsComponent implements OnInit {
 
   private _nieuwsberichten: Nieuwsbericht[];
-  private _toevoegenStatus = false;
+
 
   constructor(private _nieuwsDataService: NieuwsDataService){
     
   }
   ngOnInit() {
     this._nieuwsDataService.nieuwsBerichten.subscribe(items => this._nieuwsberichten = items);
-    document.getElementById("form").style.display = "none";
   }
   get isEmpty(): boolean{
     if(this._nieuwsberichten == null){
@@ -36,24 +35,14 @@ export class NieuwsComponent implements OnInit {
   get nieuwsBerichten(){
     return this._nieuwsberichten;
   }
-  voegNieuwsberichtToe(nieuwsbericht){
-    
-    this._nieuwsDataService.voegNieuwsberichtToe(nieuwsbericht).subscribe(item => this._nieuwsberichten.push(item));
-  }
   verwijderNieuwsbericht(nieuwsbericht){
-    this._nieuwsDataService.verwijderNieuwsbericht(nieuwsbericht).subscribe(
-      item => (this._nieuwsberichten = this._nieuwsberichten.filter(val => item.id !== val.id))  
-    );
-  }
-  toggleForm(){
-    if(this._toevoegenStatus == false){
-      document.getElementById("form").style.display = "block";
-      document.getElementById("formToggle").textContent =  "Annuleer toevoegen";
-      this._toevoegenStatus = true;
-    } else{
-      document.getElementById("form").style.display = "none";
-      document.getElementById("formToggle").textContent =  "Nieuwsbericht toevoegen";
-      this._toevoegenStatus =false;
+    if(window.confirm("Ben je zeker dat u dit nieuwbericht wil verwijderen?")){
+      if(window.confirm("Geen weg meer terug hierna...")){
+        this._nieuwsDataService.verwijderNieuwsbericht(nieuwsbericht).subscribe(
+          item => (this._nieuwsberichten = this._nieuwsberichten.filter(val => item.id !== val.id))  
+        );
+      }
     }
   }
+
 }

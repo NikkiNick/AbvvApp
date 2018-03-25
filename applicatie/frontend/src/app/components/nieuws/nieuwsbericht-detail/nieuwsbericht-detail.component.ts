@@ -22,7 +22,11 @@ export class NieuwsberichtDetailComponent implements OnInit {
   }
 
   verwijderNieuwsbericht(){
-    this.nds.verwijderNieuwsbericht(this._nieuwsbericht).subscribe();
+    if(window.confirm("Ben je zeker dat u dit nieuwbericht wil verwijderen?")){
+      if(window.confirm("Geen weg meer terug hierna...")){
+        this.nds.verwijderNieuwsbericht(this._nieuwsbericht).subscribe();
+      }
+    }
   }
   get nieuwsbericht(){
     return this._nieuwsbericht;

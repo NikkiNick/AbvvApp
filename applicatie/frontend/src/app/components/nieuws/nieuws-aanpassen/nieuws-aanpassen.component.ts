@@ -22,8 +22,6 @@ export class NieuwsAanpassenComponent implements OnInit {
 
   ngOnInit() {
 
-    document.getElementById("message").style.display = "none";
-
     this.route.data.subscribe(item => 
       this._nieuwsbericht = item['nieuwsbericht']);
     this._orgineelNieuwsbericht = this._nieuwsbericht;
@@ -50,7 +48,11 @@ export class NieuwsAanpassenComponent implements OnInit {
     });
   }
   verwijderNieuwsbericht(){
-    this.nds.verwijderNieuwsbericht(this._nieuwsbericht).subscribe();
+    if(window.confirm("Ben je zeker dat u dit nieuwbericht wil verwijderen?")){
+      if(window.confirm("Geen weg meer terug hierna...")){
+        this.nds.verwijderNieuwsbericht(this._nieuwsbericht).subscribe();
+      }
+    }
   }
   closeMessage(){
     document.getElementById("message").style.display = "none";

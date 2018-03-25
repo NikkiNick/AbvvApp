@@ -14,19 +14,19 @@ export class NieuwsToevoegenComponent implements OnInit {
 
   private nieuwsberichtForm: FormGroup;
 
-  @Output() public nieuwsbericht = new EventEmitter<Nieuwsbericht>();
-
   constructor(private _nieuwsDataService: NieuwsDataService, private fb: FormBuilder){
-    
   }
   ngOnInit(){
     this.nieuwsberichtForm = this.fb.group({
       titel: ['', [Validators.required]],
       bericht: ['', [Validators.required]]
-    })
+    });
   }
   onSubmit(){
-    const nbericht = new Nieuwsbericht(this.nieuwsberichtForm.value.titel, this.nieuwsberichtForm.value.bericht, 'Nick');
-    this.nieuwsbericht.emit(nbericht);
+    const nieuwsbericht = new Nieuwsbericht(this.nieuwsberichtForm.value.titel, this.nieuwsberichtForm.value.bericht, 'Nick');
+    this._nieuwsDataService.voegNieuwsberichtToe(nieuwsbericht).subscribe(sub => document.getElementById("message").style.display = "block");
+  }
+  closeMessage(){
+    document.getElementById("message").style.display = "none";
   }
 }

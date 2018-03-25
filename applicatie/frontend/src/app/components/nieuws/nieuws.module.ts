@@ -15,6 +15,7 @@ import { NieuwsberichtResolver } from "./nieuwsbericht-resolver";
 
 const nieuwsRoutes: Routes = [
     {path: 'nieuws', component: NieuwsComponent},
+    {path: "nieuws/toevoegen", component: NieuwsToevoegenComponent},
     {path: 'nieuws/wijzig/:nieuwsberichtID', component: NieuwsAanpassenComponent, resolve: { nieuwsbericht: NieuwsberichtResolver}},
     {path: 'nieuws/:nieuwsberichtID', component: NieuwsberichtDetailComponent, resolve: { nieuwsbericht: NieuwsberichtResolver}}
 ];

@@ -1,25 +1,30 @@
 <div class="ui top attached message overzicht">
     <div class="ui tiny header">Nieuwsbericht toevoegen</div>
 </div>
-<form [formGroup]='nieuwsberichtForm' (ngSubmit)='onSubmit()'>
-    <div class="ui form attached message"> 
-    <p>Gebruik onderstaand formulier om een nieuwsbericht toe te voegen.</p>
+<div class="ui attached message" id="form"> 
+    <form [formGroup]='nieuwsberichtForm' (ngSubmit)='onSubmit()' class="ui mini form">
+        <p>Gebruik onderstaand formulier om een nieuwsbericht toe te voegen.</p>
+        <div class="ui positive message hidden" id="message">
+                <i class="close icon" (click)="closeMessage()"></i>
+                <div class="header">Nieuwsbericht succesvol aangepast.</div>
+                <a href="nieuws">Naar het overzicht</a>
+            </div>
         <div class="field">
-        <label for="titel">Titel:</label> 
-        <input id="titel" name="titel" #titel formControlName='titel'>
+            <label for="titel">Titel:</label> 
+            <input id="titel" name="titel" #titel formControlName='titel'>
         </div>
         <div class="field">
             <label for="bericht">Bericht:</label> 
-            <textarea id="bericht" name="bericht" #bericht formControlName='bericht'></textarea>
+            <textarea id="bericht" name="bericht" #bericht formControlName='bericht' rows="4"></textarea>
         </div>
         <div class="field">
-        <button class="ui mini green button" type="submit">Toevoegen</button> 
-        <button class="ui mini red button" type="reset">Herstel</button>
+            <button class="ui mini green button" type="submit">Toevoegen</button> 
+            <button class="ui mini red button" type="reset">Herstel</button>
         </div>
         <div *ngIf='nieuwsberichtForm.get("titel").errors?.minlength && nieuwsberichtForm.get("titel").touched'  class='ui pointing red basic label'>
-            error! this is required
+                error! this is required
         </div>
-    </div>
-</form>
+    </form>
+</div>
   
   
