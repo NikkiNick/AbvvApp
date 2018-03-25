@@ -1,6 +1,5 @@
-.overzicht{
-    background-color: #db2828;
-}
-.overzicht{
-    color: white;
+.bericht{
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;    
 }

@@ -16,7 +16,7 @@
   <tbody>
     <tr *ngFor="let nbericht of nieuwsBerichten" [routerLink]="['/nieuws', nbericht.id]">
         <td>{{nbericht.titel}}</td>
-        <td>{{nbericht.bericht}}</td>
+        <td class="bericht">{{nbericht.bericht}}</td>
         <td class="center aligned">{{nbericht.toegevoegdOp | date: "dd/MM/yyyy"}}</td>
         <td class="center aligned">{{nbericht.toegevoegdDoor}}</td>
     </tr>
