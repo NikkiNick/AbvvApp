@@ -1,16 +1,27 @@
 <div class="ui message">
     <div class="header">Nieuws...</div>
     <div class="ui hidden divider"></div>
-    Welkom op de nieuwspagina van Abvv Aviation.<br>
-    <a href="nieuws/toevoegen">Nieuwsbericht toevoegen</a>
+    Welkom op de nieuwspagina van Abvv Aviation.<br><br>
+    <a class="ui mini blue button" href="nieuws/toevoegen">Nieuwsbericht toevoegen</a>
 </div>
-
-<div class="ui top attached message overzicht">
-  <div class="ui tiny header">Nieuwsberichten</div>
-</div>
-<div class="ui attached message" *ngIf="isEmpty">
-  Er zijn geen nieuwsberichten
-</div>
-<app-nieuwsbericht *ngFor="let nbericht of nieuwsBerichten" [nieuwsbericht]='nbericht' (deleteNieuwsbericht)='verwijderNieuwsbericht($event)' (changeNieuwsbericht)='wijzigNieuwsbericht($event)'></app-nieuwsbericht>
-
-  
+<table class="ui red fixed table">
+  <thead>
+    <tr>
+      <th style="width: 30%;">Titel</th>
+      <th style="width: 40%;">Bericht</th>
+      <th class="center aligned" style="width: 15%;">Datum</th>
+      <th class="center aligned" style="width: 15%;">Auteur</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let nbericht of nieuwsBerichten" [routerLink]="['/nieuws', nbericht.id]">
+        <td>{{nbericht.titel}}</td>
+        <td>{{nbericht.bericht}}</td>
+        <td class="center aligned">{{nbericht.toegevoegdOp | date: "dd/MM/yyyy"}}</td>
+        <td class="center aligned">{{nbericht.toegevoegdDoor}}</td>
+    </tr>
+    <tr *ngIf="isEmpty">
+      <td colspan="4">Geen nieuwsberichten</td>
+    </tr>
+  </tbody>
+</table>
