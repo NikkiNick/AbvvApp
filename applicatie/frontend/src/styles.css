@@ -45,4 +45,9 @@ table {
 }
 body{
 	background-color: orangered;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	width: 90%;
+	margin: 0 auto;
+	border-left: 1px solid white;
+	border-right: 1px solid white;
 }
