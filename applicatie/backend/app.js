@@ -1,6 +1,13 @@
 //database verbinding
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/abvv_db1');
+
+// passport
+let passport = require('passport');
+require('./config/passport');
+
+// models
+require('./models/User');
 require('./models/Nieuwsbericht');
 
 var express = require('express');
@@ -11,6 +18,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
+var nieuws = require('./routes/nieuws');
 var users = require('./routes/users');
 
 
@@ -24,9 +32,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/API/nieuws', nieuws);
+app.use('/API/gebruiker', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -43,7 +53,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.send('error');
+  res.json(err.message);
 });
 
 module.exports = app;

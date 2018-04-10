@@ -1,0 +1,33 @@
+<div class="ui top attached message overzicht">
+        <div class="ui tiny header">Registreren</div>
+    </div>
+    <div class="ui attached message"> 
+        <form (ngSubmit)='onSubmit()' class="ui mini form" [formGroup]='registerForm'>
+            <div class="ui positive message hidden" id="message">
+                <i class="close icon" (click)="closeMessage()"></i>
+                <div class="header">Succesvol geregistreerd.</div>
+            </div>
+            <div class="field">
+                <label for="username">Gebruikersnaam:</label>
+                <input type="text" id="username" formControlName='username'>
+            </div>
+            <div formGroupName='passwordGroup' class="ui container">
+                <div class="field">
+                    <label for="password">Wachtwoord:</label>
+                    <input type="password" id="password" formControlName='password'>
+                </div>
+                <div class="field">
+                    <label for="confirmPassword">Bevestig wachtwoord:</label>
+                    <input type="password" id="confirmPassword" formControlName='confirmPassword'>
+                </div>
+            </div>
+            <div class="ui divider hidden"></div>
+            <div class="ui container">
+                <button class="ui mini green button" type="submit">Registreer</button> 
+                <button  class="ui mini orange button" type="reset">Herstel</button>
+            </div>
+            <div class='ui pointing red basic label' *ngIf='registerForm.get("username").errors?.userAlreadyExists && registerForm.get("username").touched'>
+                    a user with that name already exists
+            </div>
+        </form>
+    </div>

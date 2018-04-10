@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Nieuwsbericht } from './classes/nieuwsbericht';
-import { NieuwsDataService } from './services/nieuws-data.service';
+import { NieuwsDataService } from '../app/components/nieuws/service/nieuws-data.service';
 
 @Component({
   selector: 'app-root',

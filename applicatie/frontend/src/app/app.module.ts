@@ -8,7 +8,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { MainComponent } from './components/main/main.component';
-import { UserComponent } from './components/user/user.component';
 import { AboutComponent } from './components/about/about.component';
 import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
@@ -16,6 +15,8 @@ import { LinksComponent } from './components/links/links.component';
 import { DownloadsComponent } from './components/downloads/downloads.component';
 
 import { NieuwsModule } from './components/nieuws/nieuws.module';
+import { UserModule } from './components/user/user.module';
+import { LoginComponent } from './components/user/login/login.component';
 
 const appRoutes: Routes = [
   {path:'', component: HomeComponent},
@@ -31,15 +32,16 @@ const appRoutes: Routes = [
     AppComponent,
     NavigationComponent,
     MainComponent,
-    UserComponent,
     AboutComponent,
     HomeComponent,
     PageNotFoundComponent,
     LinksComponent,
     DownloadsComponent,
+    LoginComponent
   ],
   imports: [
     NieuwsModule,
+    UserModule,
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,

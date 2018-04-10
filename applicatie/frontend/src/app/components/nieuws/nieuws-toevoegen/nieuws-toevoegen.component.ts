@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Nieuwsbericht } from '../../../classes/nieuwsbericht';
-import { NieuwsDataService } from '../../../services/nieuws-data.service';
+import { NieuwsDataService } from '../service/nieuws-data.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 

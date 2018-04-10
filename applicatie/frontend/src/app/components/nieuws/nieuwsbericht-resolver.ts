@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Nieuwsbericht } from "../../classes/nieuwsbericht";
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
 import { Observable } from "rxjs/Observable";
-import { NieuwsDataService } from "../../services/nieuws-data.service";
+import { NieuwsDataService } from "./service/nieuws-data.service";
 
 @Injectable()
 export class NieuwsberichtResolver implements Resolve<Nieuwsbericht> {

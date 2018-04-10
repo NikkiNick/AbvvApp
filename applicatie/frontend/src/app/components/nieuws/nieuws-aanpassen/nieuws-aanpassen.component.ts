@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Nieuwsbericht } from '../../../classes/nieuwsbericht';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NieuwsDataService } from '../../../services/nieuws-data.service';
+import { NieuwsDataService } from '../service/nieuws-data.service';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
