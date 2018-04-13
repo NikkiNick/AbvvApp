@@ -35,8 +35,8 @@ export class RegistreerComponent implements OnInit {
       username: ['', [Validators.required, Validators.minLength(4)], this.serverSideValidateUsername()],
       naam: ['', [Validators.required]],
       voornaam: ['', [Validators.required]],
-      email: ['', [Validators.required]],
-      personeelsnummer: ['', [Validators.required]],
+      email: ['', [Validators.required], this.serverSideValidateEmail()],
+      personeelsnummer: ['', [Validators.required], this.serverSideValidatePersoneelsnummer()],
       passwordGroup: this.fb.group({
         password: ['', [Validators.required, passwordValidator(6)]],
         confirmPassword: ['', Validators.required]
@@ -57,7 +57,34 @@ export class RegistreerComponent implements OnInit {
         );
      };
   }
-  
+  serverSideValidateEmail(): ValidatorFn {
+    return (control: AbstractControl): Observable<{ [key: string]: any }> => {
+      return this.authenticationService
+        .checkEmailAvailability(control.value)
+        .pipe(
+          map(available => {
+            if (available) {
+              return null;
+            }
+            return { emailAlreadyExists: true };
+          })
+        );
+     };
+  }
+  serverSideValidatePersoneelsnummer(): ValidatorFn {
+    return (control: AbstractControl): Observable<{ [key: string]: any }> => {
+      return this.authenticationService
+        .checkPersoneelsnummerAvailability(control.value)
+        .pipe(
+          map(available => {
+            if (available) {
+              return null;
+            }
+            return { personeelsnummerAlreadyExists: true };
+          })
+        );
+     };
+  }
   onSubmit(){
     this.authenticationService
       .register(

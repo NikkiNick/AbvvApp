@@ -86,6 +86,28 @@ export class AuthenticationService {
       })
     );
   }
+  checkEmailAvailability(email: string): Observable<boolean> {
+    return this.http.post(`${this._url}checkemail`, { email }).pipe(
+      map((item: any) => {
+        if (item.email === 'alreadyexists') {
+          return false;
+        } else {
+          return true;
+        }
+      })
+    );
+  }
+  checkPersoneelsnummerAvailability(personeelsnummer: Number): Observable<boolean> {
+    return this.http.post(`${this._url}checkpersoneelsnummer`, { personeelsnummer }).pipe(
+      map((item: any) => {
+        if (item.personeelsnummer === 'alreadyexists') {
+          return false;
+        } else {
+          return true;
+        }
+      })
+    );
+  }
   getUser(username: string): Observable<User>{
     return this.http
       .get(`${this._url}/${username}`)

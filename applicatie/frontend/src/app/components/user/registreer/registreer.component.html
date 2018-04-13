@@ -36,6 +36,9 @@
             <div class="field">
                 <label for="email">E-mail:</label>
                 <input type="email" id="email" formControlName="email">
+                <div class='ui pointing red basic mini label' *ngIf='registerForm.get("email").errors?.emailAlreadyExists && registerForm.get("email").touched'>
+                    Dit emailadres is al in gebruik
+                </div>
                 <div class='ui pointing red basic mini label' *ngIf='registerForm.get("email").errors?.required && registerForm.get("email").touched'>
                         Dit veld is verplicht
                 </div>
@@ -43,6 +46,9 @@
             <div class="field">
                 <label for="personeelsnummer">Personeelsnummer:</label>
                 <input type="number" min="0" max="999999" id="personeelsnummer" formControlName="personeelsnummer">
+                <div class='ui pointing red basic mini label' *ngIf='registerForm.get("personeelsnummer").errors?.personeelsnummerAlreadyExists && registerForm.get("personeelsnummer").touched'>
+                    Dit personeelsnummer is al in gebruik
+                </div>
                 <div class='ui pointing red basic mini label' *ngIf='registerForm.get("personeelsnummer").errors?.required && registerForm.get("personeelsnummer").touched'>
                         Dit veld is verplicht
                 </div>

@@ -54,7 +54,28 @@ router.post('/checkusername', function(req, res, next) {
       }
   });
 });
-
+// check email beschikbaarheid
+router.post('/checkemail', function(req, res, next) {
+  User.find({email: req.body.email}, 
+    function(err, result) {
+      if (result.length) {
+        res.json({'email': 'alreadyexists'})
+      } else {
+        res.json({'email': 'ok'})
+      }
+  });
+});
+// check personeelsnummer beschikbaarheid
+router.post('/checkpersoneelsnummer', function(req, res, next) {
+  User.find({personeelsnummer: req.body.personeelsnummer}, 
+    function(err, result) {
+      if (result.length) {
+        res.json({'personeelsnummer': 'alreadyexists'})
+      } else {
+        res.json({'personeelsnummer': 'ok'})
+      }
+  });
+});
 // get user
 router.get('/:username', function(req, res, next) {
   let query = User.find({username: req.params.username});
