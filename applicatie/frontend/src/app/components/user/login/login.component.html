@@ -1,18 +1,28 @@
-<div class="ui top attached message">
-  <div class="header">Inloggen</div>
+<div class="ui container" *ngIf="!isLoggedIn">
+  <div class="ui top attached message">
+    <div class="header">Inloggen</div>
+  </div>
+  <div class="ui attached message">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="ui mini form">
+      <div class="field">
+        <label for="loginUsername">Gebruikersnaam:</label>
+        <input type="text" id="loginUsername" formControlName='loginUsername'>
+      </div>
+      <div class="field">
+        <label for="loginPassword">Wachtwoord:</label>
+        <input type="password" id="loginPassword" formControlName='loginPassword'>
+      </div>
+    </form>
+    <div class="ui divider hidden"></div>
+    <button class="ui mini green button" type="submit" (click)="onSubmit()">Inloggen</button>
+    <a class="ui blue mini button" href='gebruiker/registreer'>Registreer</a>
+  </div>
 </div>
-<div class="ui attached message">
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="ui mini form">
-    <div class="field">
-      <label for="loginUsername">Gebruikersnaam:</label>
-      <input type="text" id="loginUsername" formControlName='loginUsername'>
-    </div>
-    <div class="field">
-      <label for="loginPassword">Wachtwoord:</label>
-      <input type="password" id="loginPassword" formControlName='loginPassword'>
-    </div>
-  </form>
-  <div class="ui divider hidden"></div>
-  <button class="ui mini green button" type="submit" (click)="onSubmit()">Inloggen</button>
-  <a class="ui blue mini button" href='gebruiker/registreer'>Registreer</a>
+<div *ngIf="isLoggedIn">  
+  <div class="ui top attached message">
+    <div class="header">Welkom</div>
+  </div>
+  <div class="ui attached message">
+    <button class="ui mini orange button" type="button" (click)="logOut()">Uitloggen</button>
+  </div>
 </div>

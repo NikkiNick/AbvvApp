@@ -18,7 +18,7 @@ router.post('/registreer', function(req, res, next) {
   let user = new User();
   user.username = req.body.username;
   user.setPassword(req.body.password);
-  User.save(function(err) {
+  user.save(function(err) {
     if (err) { return next(err); }
     return res.json({ token: user.generateJWT() });
   });
@@ -48,6 +48,16 @@ router.post('/checkusername', function(req, res, next) {
       } else {
         res.json({'username': 'ok'})
       }
+  });
+});
+
+// get user
+router.get('/:username', function(req, res, next) {
+  let query = User.find({username: req.params.username});
+  query.exec(function (err, user){
+    if (err) { return next(err); }
+    if (!user) { return next(new Error('not found ' + req.params.username)); }
+    res.json(user);
   });
 });
 module.exports = router;

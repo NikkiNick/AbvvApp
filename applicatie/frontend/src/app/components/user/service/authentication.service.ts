@@ -3,11 +3,13 @@ import {BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { User } from '../../../classes/user';
 
 @Injectable()
 export class AuthenticationService {
 
-  private _redirectUrl: string;
+  public _redirectUrl: string;
   private readonly _tokenKey = 'currentUser';
   private _url = '/API/gebruiker/';
   private _user$: BehaviorSubject<string>;
@@ -21,7 +23,9 @@ export class AuthenticationService {
         parsedToken = null;
       }
     }
-    this._user$ = new BehaviorSubject<string>(parsedToken && parsedToken.username);
+    this._user$ = new BehaviorSubject<string>(
+      parsedToken && parsedToken.username
+);
   } 
 
   get redirectUrl(): string{
@@ -29,7 +33,11 @@ export class AuthenticationService {
   }
   get user$(): BehaviorSubject<string> {
     return this._user$;
-  }  
+  } 
+  get token(): string {
+    const localToken = localStorage.getItem(this._tokenKey);
+    return !!localToken ? localToken : '';
+  } 
   set redirectUrl(value){
     this._redirectUrl = value;
   }
@@ -46,21 +54,21 @@ export class AuthenticationService {
         }
       })
     );
-}
-register(username: string, password: string): Observable<boolean> {
-  return this.http.post(`${this._url}registreer`, { username, password }).pipe(
-    map((res: any) => {
-      const token = res.token;
-      if (token) {
-        localStorage.setItem(this._tokenKey, token);
-        this._user$.next(username);
-        return true;
-      } else {
-        return false;
-      }
-    })
-  );
-}
+  }
+  register(username: string, password: string): Observable<boolean> {
+    return this.http.post(`${this._url}registreer`, { username, password }).pipe(
+      map((res: any) => {
+        const token = res.token;
+        if (token) {
+          localStorage.setItem(this._tokenKey, token);
+          this._user$.next(username);
+          return true;
+        } else {
+          return false;
+        }
+      })
+    );
+  }
   logout() {
     if (this.user$.getValue()) {
       localStorage.removeItem('currentUser');
@@ -77,7 +85,12 @@ register(username: string, password: string): Observable<boolean> {
         }
       })
     );
-}
+  }
+  getUser(username: string): Observable<User>{
+    return this.http
+      .get(`${this._url}/${username}`)
+      .pipe(map(User.fromJSON));
+    }
 }
 function parseJwt(token) {
   if (!token) {

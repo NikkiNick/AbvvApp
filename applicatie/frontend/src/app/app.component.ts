@@ -11,6 +11,6 @@ import { NieuwsDataService } from '../app/components/nieuws/service/nieuws-data.
 export class AppComponent {
 
   constructor(private _nieuwsDataService: NieuwsDataService){
-
   }
+  
 }

@@ -1,6 +1,6 @@
 //database verbinding
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/abvv_db1');
+mongoose.connect('mongodb://localhost/abvv_db');
 
 // passport
 let passport = require('passport');

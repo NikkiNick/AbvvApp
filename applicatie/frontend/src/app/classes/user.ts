@@ -1,4 +1,5 @@
 export class User {
+    private _username: string;
     private _naam: string;
     private _voornaam: string;
     private _email: string;
@@ -11,6 +12,9 @@ export class User {
     }
 
     ///GETTERS
+    get username(): string{
+        return this._username;
+    }
     get naam(): string{
         return this._naam;
     }
@@ -19,5 +23,10 @@ export class User {
     }
     get email(): string{
         return this._email;
+    }
+    static fromJSON(json: any): User {
+        let user = new User(json.naam, json.voornaam, json.email);
+        user._username = json.username;
+        return user;
     }
 }

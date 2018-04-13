@@ -10,24 +10,36 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { MainComponent } from './components/main/main.component';
 import { AboutComponent } from './components/about/about.component';
 import { HomeComponent } from './components/home/home.component';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './components/errors/page-not-found/page-not-found.component';
 import { LinksComponent } from './components/links/links.component';
 import { DownloadsComponent } from './components/downloads/downloads.component';
 
 import { NieuwsModule } from './components/nieuws/nieuws.module';
 import { UserModule } from './components/user/user.module';
 import { LoginComponent } from './components/user/login/login.component';
+import { AuthGuardService } from './components/user/service/auth-guard.service';
+import { NoAccesComponent } from './components/errors/no-acces/no-acces.component';
+
 
 const appRoutes: Routes = [
   {path:'', component: HomeComponent},
   {path:'home', component: HomeComponent},
   {path:'about', component: AboutComponent},
-  {path:'links', component: LinksComponent},
+  {path:'links', component: LinksComponent, canActivate: [AuthGuardService]},
   {path:'downloads', component: DownloadsComponent},
+  {path: '401', component: NoAccesComponent},
   {path: '404', component: PageNotFoundComponent},
   {path: '**', redirectTo: '/404'}
 ];
 @NgModule({
+  imports: [
+    NieuwsModule,
+    UserModule,
+    BrowserModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot(appRoutes)
+  ],
   declarations: [
     AppComponent,
     NavigationComponent,
@@ -37,15 +49,8 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     LinksComponent,
     DownloadsComponent,
-    LoginComponent
-  ],
-  imports: [
-    NieuwsModule,
-    UserModule,
-    BrowserModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes)
+    LoginComponent,
+    NoAccesComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

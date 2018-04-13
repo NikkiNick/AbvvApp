@@ -34,7 +34,7 @@ export class RegistreerComponent implements OnInit {
     this.registerForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(4)], this.serverSideValidateUsername()],
       passwordGroup: this.fb.group({
-        password: ['', [Validators.required, passwordValidator(5)]],
+        password: ['', [Validators.required, passwordValidator(6)]],
         confirmPassword: ['', Validators.required]
       }, { validator: comparePasswords })
     });
@@ -68,7 +68,6 @@ export class RegistreerComponent implements OnInit {
         (error: HttpErrorResponse) => {
           this.errorMsg = `Error ${ error.status } while trying to register user ${this.registerForm.value.username}:
                              ${ error.error }`;
-                             console.log(this.errorMsg);
         }
     ); 
   } 

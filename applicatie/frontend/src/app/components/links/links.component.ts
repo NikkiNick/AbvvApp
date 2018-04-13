@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../user/service/authentication.service';
 
 @Component({
   selector: 'app-links',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LinksComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthenticationService) {
+   }
 
   ngOnInit() {
   }

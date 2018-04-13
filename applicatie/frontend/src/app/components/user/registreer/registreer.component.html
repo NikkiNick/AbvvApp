@@ -10,24 +10,39 @@
             <div class="field">
                 <label for="username">Gebruikersnaam:</label>
                 <input type="text" id="username" formControlName='username'>
+                <div class='ui pointing red basic message' *ngIf='registerForm.get("username").errors?.userAlreadyExists && registerForm.get("username").touched'>
+                    Deze gebruikersnaam is al in gebruik
+                </div>
+                <div class='ui pointing red basic label' *ngIf='registerForm.get("username").errors?.required && registerForm.get("username").touched'>
+                    Dit veld is verplicht
+                </div>
             </div>
             <div formGroupName='passwordGroup' class="ui container">
                 <div class="field">
                     <label for="password">Wachtwoord:</label>
                     <input type="password" id="password" formControlName='password'>
+                    <div class='ui pointing red basic label' *ngIf='registerForm.get("passwordGroup").get("password").errors?.required && registerForm.get("passwordGroup").get("password").touched'>
+                            Dit veld is verplicht
+                    </div>
+                    <div class='ui pointing red basic label' *ngIf='registerForm.get("passwordGroup").get("password").errors?.passwordTooShort && registerForm.get("passwordGroup").get("password").touched'>
+                            Wachtwoord is te kort (gebruik minstens {{registerForm.get("passwordGroup").get("password").errors?.passwordTooShort.requiredLength}} tekens)
+                    </div>
                 </div>
                 <div class="field">
                     <label for="confirmPassword">Bevestig wachtwoord:</label>
                     <input type="password" id="confirmPassword" formControlName='confirmPassword'>
+                    <div class='ui pointing red basic label' *ngIf='registerForm.get("passwordGroup").get("confirmPassword").errors?.required && registerForm.get("passwordGroup").get("confirmPassword").touched'>
+                            Dit veld is verplicht
+                    </div>
+                </div>
+                <div class='ui pointing red basic label' *ngIf='registerForm.get("passwordGroup").errors?.passwordsDiffer && registerForm.get("passwordGroup").get("confirmPassword").touched  && registerForm.get("passwordGroup").get("password").touched'>
+                    Wachtwoorden komen niet overéén
                 </div>
             </div>
             <div class="ui divider hidden"></div>
             <div class="ui container">
-                <button class="ui mini green button" type="submit">Registreer</button> 
+                <button class="ui mini green button" type="submit" [disabled]="!registerForm.valid">Registreer</button> 
                 <button  class="ui mini orange button" type="reset">Herstel</button>
-            </div>
-            <div class='ui pointing red basic label' *ngIf='registerForm.get("username").errors?.userAlreadyExists && registerForm.get("username").touched'>
-                    a user with that name already exists
             </div>
         </form>
     </div>
