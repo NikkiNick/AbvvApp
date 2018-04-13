@@ -55,8 +55,8 @@ export class AuthenticationService {
       })
     );
   }
-  register(username: string, password: string): Observable<boolean> {
-    return this.http.post(`${this._url}registreer`, { username, password }).pipe(
+  register(username: string, naam: string, voornaam: string, email: string, personeelsnummer: number, password: string): Observable<boolean> {
+    return this.http.post(`${this._url}registreer`, { username, naam, voornaam, email, personeelsnummer, password }).pipe(
       map((res: any) => {
         const token = res.token;
         if (token) {

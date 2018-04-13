@@ -33,14 +33,15 @@ export class RegistreerComponent implements OnInit {
   ngOnInit() {
     this.registerForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(4)], this.serverSideValidateUsername()],
+      naam: ['', [Validators.required]],
+      voornaam: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+      personeelsnummer: ['', [Validators.required]],
       passwordGroup: this.fb.group({
         password: ['', [Validators.required, passwordValidator(6)]],
         confirmPassword: ['', Validators.required]
       }, { validator: comparePasswords })
     });
-  }
-  get passwordControl(): FormControl {
-    return <FormControl>this.registerForm.get('passwordGroup').get('password');
   }
   serverSideValidateUsername(): ValidatorFn {
     return (control: AbstractControl): Observable<{ [key: string]: any }> => {
@@ -56,9 +57,16 @@ export class RegistreerComponent implements OnInit {
         );
      };
   }
+  
   onSubmit(){
     this.authenticationService
-      .register(this.registerForm.value.username, this.passwordControl.value)
+      .register(
+        this.registerForm.value.username, 
+        this.registerForm.value.naam,
+        this.registerForm.value.voornaam,
+        this.registerForm.value.email,
+        this.registerForm.value.personeelsnummer,
+        this.registerForm.get("passwordGroup").value.password)
       .subscribe(
         val => {
           if (val) {
