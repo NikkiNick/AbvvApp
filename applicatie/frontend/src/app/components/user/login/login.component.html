@@ -26,7 +26,24 @@
     <div class="header">Welkom {{user?.voornaam}}</div>
   </div>
   <div class="ui attached message">
-    <a href="admin/overzicht-gebruikers">Overzicht gebruikers</a>
-    <button class="ui mini orange button" type="button" (click)="logOut()">Uitloggen</button>
+    <div class="ui mini relaxed divided list">
+
+      <div class="item">
+        <a href="gebruiker/profiel/wijzig" class="header">Mijn profiel wijzigen</a>
+      </div>
+
+      <div class="item" *ngIf="isUserAdmin">
+        <a href="admin/overzicht-gebruikers" class="header">Overzicht gebruikers</a>
+      </div>
+
+      <div class="item" *ngIf="isUserAdmin">
+        <a href="nieuws/toevoegen" class="header">Nieuwsbericht plaatsen</a>
+      </div>
+          
+      <div class="item">
+        <a (click)="logOut()" class="header" href="">Uitloggen</a>
+      </div>
+
+    </div>
   </div>
 </div>

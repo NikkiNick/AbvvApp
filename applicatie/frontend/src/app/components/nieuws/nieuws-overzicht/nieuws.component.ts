@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Nieuwsbericht } from '../../../classes/nieuwsbericht';
 import { NieuwsDataService } from '../service/nieuws-data.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AuthenticationService } from '../../../auth/authentication.service';
 
 @Component({
   selector: 'app-nieuws',
@@ -14,7 +15,7 @@ export class NieuwsComponent implements OnInit {
   private _nieuwsberichten: Nieuwsbericht[];
 
 
-  constructor(private _nieuwsDataService: NieuwsDataService){
+  constructor(private _nieuwsDataService: NieuwsDataService, private authService: AuthenticationService){
     
   }
   ngOnInit() {
@@ -43,6 +44,9 @@ export class NieuwsComponent implements OnInit {
         );
       }
     }
+  }
+  get isUserAdmin(): boolean{
+    return this.authService.isUserAdmin();
   }
 
 }

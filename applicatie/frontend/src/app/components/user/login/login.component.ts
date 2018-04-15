@@ -64,6 +64,9 @@ export class LoginComponent implements OnInit {
     }
     return false;
   }
+  get isUserAdmin(): boolean{
+    return this.authService.isUserAdmin();
+  }
   get user(): User{
     return this._user;
   }

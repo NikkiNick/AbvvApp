@@ -1,8 +1,9 @@
 <div class="ui message">
     <div class="header">Nieuws...</div>
     <div class="ui hidden divider"></div>
-    Welkom op de nieuwspagina van Abvv Aviation.<br><br>
-    <a class="ui mini blue button" href="nieuws/toevoegen">Nieuwsbericht toevoegen</a>
+    Welkom op de nieuwspagina van Abvv Aviation.
+    <br>
+    <a class="ui mini blue button" href="nieuws/toevoegen" *ngIf="isUserAdmin">Nieuwsbericht toevoegen</a>
 </div>
 <table class="ui red fixed table">
   <thead>

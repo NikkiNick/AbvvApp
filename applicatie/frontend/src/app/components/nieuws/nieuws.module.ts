@@ -10,14 +10,22 @@ import { NieuwsAanpassenComponent } from "./nieuws-aanpassen/nieuws-aanpassen.co
 import { NieuwsDetailComponent } from "./nieuws-detail/nieuws-detail.component";
 import { NieuwsDataService } from "./service/nieuws-data.service";
 import { NieuwsberichtResolver } from "./nieuwsbericht-resolver";
-import { AuthGuardService } from "./../../auth/auth-guard.service";
+import { AdminGuard } from "../../auth/admin.guard";
+
 
 
 const nieuwsRoutes: Routes = [
-    {path: 'nieuws', component: NieuwsComponent},
-    {path: "nieuws/toevoegen", component: NieuwsToevoegenComponent, canActivate: [AuthGuardService]},
-    {path: 'nieuws/wijzig/:nieuwsberichtID', component: NieuwsAanpassenComponent, resolve: { nieuwsbericht: NieuwsberichtResolver}},
-    {path: 'nieuws/:nieuwsberichtID', component: NieuwsDetailComponent, resolve: { nieuwsbericht: NieuwsberichtResolver}}
+    {path: 'nieuws', 
+        component: NieuwsComponent},
+    {path: "nieuws/toevoegen", 
+        component: NieuwsToevoegenComponent, 
+        canActivate: [AdminGuard]},
+    {path: 'nieuws/wijzig/:nieuwsberichtID', 
+        component: NieuwsAanpassenComponent, 
+        resolve: { nieuwsbericht: NieuwsberichtResolver}},
+    {path: 'nieuws/:nieuwsberichtID', 
+        component: NieuwsDetailComponent, 
+        resolve: { nieuwsbericht: NieuwsberichtResolver}}
 ];
 
 @NgModule({
