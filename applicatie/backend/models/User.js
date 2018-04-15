@@ -9,7 +9,8 @@ let UserSchema = new mongoose.Schema({
     naam: String,
     voornaam: String,
     email: String, 
-    personeelsnummer: Number
+    personeelsnummer: Number,
+    rechten: String
 });
 
 UserSchema.methods.setPassword = function (password) {

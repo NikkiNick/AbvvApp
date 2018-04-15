@@ -22,10 +22,15 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthenticationService, private router: Router, private fb: FormBuilder) { }
 
   ngOnInit() {
+    if(this.isLoggedIn){
+      this.authService.getUser(this.authService.user$.getValue()).subscribe(
+        user => this._user = user);
+    }
     this.loginForm = this.fb.group({
       loginUsername: ['', Validators.required],
       loginPassword: ['', Validators.required]
     });
+    
   }
   onSubmit() {
     this.authService

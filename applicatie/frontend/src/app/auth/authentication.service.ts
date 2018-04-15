@@ -106,12 +106,14 @@ export class AuthenticationService {
       })
     );
   }
-getUser(username: string){
-    return this.http
-      .get(`${this._url}/${username}`)
-      .pipe(map(User.fromJSON));
-    }
+  getUser(username: string){
+      return this.http
+        .get(`${this._url}/${username}`)
+        .pipe(map(User.fromJSON));
+  }
+
 }
+
 function parseJwt(token) {
   if (!token) {
     return null;
