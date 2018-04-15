@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Nieuwsbericht } from '../../../classes/nieuwsbericht';
 import { NieuwsDataService } from '../service/nieuws-data.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthenticationService } from '../../../auth/authentication.service';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class NieuwsToevoegenComponent implements OnInit {
 
   private nieuwsberichtForm: FormGroup;
 
-  constructor(private _nieuwsDataService: NieuwsDataService, private fb: FormBuilder){
+  constructor(private _nieuwsDataService: NieuwsDataService, private fb: FormBuilder, private authService: AuthenticationService){
   }
   ngOnInit(){
     this.nieuwsberichtForm = this.fb.group({
@@ -23,8 +24,10 @@ export class NieuwsToevoegenComponent implements OnInit {
     });
   }
   onSubmit(){
-    const nieuwsbericht = new Nieuwsbericht(this.nieuwsberichtForm.value.titel, this.nieuwsberichtForm.value.bericht, 'Nick');
-    this._nieuwsDataService.voegNieuwsberichtToe(nieuwsbericht).subscribe(sub => document.getElementById("message").style.display = "block");
+    const nieuwsbericht = new Nieuwsbericht(this.nieuwsberichtForm.value.titel, this.nieuwsberichtForm.value.bericht, this.authService.user$.getValue());
+    this._nieuwsDataService.voegNieuwsberichtToe(nieuwsbericht)
+      .subscribe(
+        sub => document.getElementById("message").style.display = "block");
   }
   closeMessage(){
     document.getElementById("message").style.display = "none";

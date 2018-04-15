@@ -4,6 +4,9 @@
   </div>
   <div class="ui attached message">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="ui mini form">
+      <div class="ui red message" *ngIf="errorMsg">
+        Error: {{errorMsg}}
+      </div>
       <div class="field">
         <label for="loginUsername">Gebruikersnaam:</label>
         <input type="text" id="loginUsername" formControlName='loginUsername'>
@@ -20,9 +23,10 @@
 </div>
 <div *ngIf="isLoggedIn">  
   <div class="ui top attached message">
-    <div class="header">Welkom</div>
+    <div class="header">Welkom {{user?.voornaam}}</div>
   </div>
   <div class="ui attached message">
+    <a href="admin/overzicht-gebruikers">Overzicht gebruikers</a>
     <button class="ui mini orange button" type="button" (click)="logOut()">Uitloggen</button>
   </div>
 </div>

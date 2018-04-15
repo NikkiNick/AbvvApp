@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthGuardService } from '../service/auth-guard.service';
+import { AuthGuardService } from './../../../auth/auth-guard.service';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../service/authentication.service';
+import { AuthenticationService } from './../../../auth/authentication.service';
 import { User } from '../../../classes/user';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class LoginComponent implements OnInit {
 
-  private _user: Observable<User>;
+  private  _user: User;
   private loginForm: FormGroup;
   private errorMsg: string;
 
@@ -32,8 +33,9 @@ export class LoginComponent implements OnInit {
       .subscribe(
         val => {
           if (val) {
-            this._user = this.authService.getUser(this.authService.user$.getValue());
-            console.log(this.authService.user$.getValue());
+            this.authService.getUser(this.authService.user$.getValue()).subscribe(
+              user => this._user = user
+            );
             if (this.authService.redirectUrl) {
               this.router.navigateByUrl(this.authService.redirectUrl);
               this.authService.redirectUrl = undefined;
@@ -42,8 +44,10 @@ export class LoginComponent implements OnInit {
             }
           }
         }, 
-        err =>  this.errorMsg = "Error while logging in user"
-        );
+        err =>  {
+          this.errorMsg = "Probleem bij het inloggen";
+          console.log(err.status+" - "+err.message);
+        });
   }
   logOut(){
     this.authService.logout();
@@ -55,8 +59,9 @@ export class LoginComponent implements OnInit {
     }
     return false;
   }
-  get user(): Observable<User>{
+  get user(): User{
     return this._user;
   }
+
 }
 

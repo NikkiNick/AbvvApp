@@ -3,10 +3,10 @@ export class User {
     private _naam: string;
     private _voornaam: string;
     private _email: string;
-    private _personeelsnummer: string;
+    private _personeelsnummer: Number;
 
     ///CONSTRUCTOR
-    constructor(username: string, naam: string, voornaam: string, email:string, personeelsnummer: string){
+    constructor(username: string, naam: string, voornaam: string, email:string, personeelsnummer: Number){
         this._username = username;
         this._naam = naam;
         this._voornaam = voornaam;
@@ -27,7 +27,7 @@ export class User {
     get email(): string{
         return this._email;
     }
-    get personeelsnummer(): string{
+    get personeelsnummer(): Number{
         return this._personeelsnummer;
     }
     static fromJSON(json: any): User {

@@ -12,7 +12,7 @@ router.param('nieuwsberichtID', function(req, res, next, id) {
   let query = Nieuwsbericht.findById(id);
   query.exec(function (err, nieuwsbericht){
     if (err) { return next(err); }
-    if (!nieuwsbericht) { return next(new Error('not found ' + id)); }
+    if (!nieuwsbericht) { return next(new Error('Nieuwsbericht niet gevonden')); }
     req.nieuwsbericht = nieuwsbericht;
     return next();
   });

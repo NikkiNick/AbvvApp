@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { RegistreerComponent } from './registreer/registreer.component';
 import { LoginComponent } from './login/login.component';
-import { AuthenticationService } from './service/authentication.service';
+import { AuthenticationService } from './../../auth/authentication.service';
 import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AuthGuardService } from './service/auth-guard.service';
+import { AuthGuardService } from './../../auth/auth-guard.service';
 
 
 const userRoutes: Routes = [

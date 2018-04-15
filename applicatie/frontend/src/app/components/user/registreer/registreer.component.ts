@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
-import { AuthenticationService } from '../service/authentication.service';
+import { AuthenticationService } from '../../../auth/authentication.service';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
