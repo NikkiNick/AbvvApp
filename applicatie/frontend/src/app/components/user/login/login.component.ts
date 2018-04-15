@@ -22,6 +22,9 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthenticationService, private router: Router, private fb: FormBuilder) { }
 
   ngOnInit() {
+    const token = localStorage.getItem("currentUser");
+    const payload = JSON.parse(window.atob(token.split('.')[1]));
+    console.log(payload);
     if(this.isLoggedIn){
       this.authService.getUser(this.authService.user$.getValue()).subscribe(
         user => this._user = user);

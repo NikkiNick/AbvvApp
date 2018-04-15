@@ -39,6 +39,14 @@ export class AuthenticationService {
   set redirectUrl(value){
     this._redirectUrl = value;
   }
+  isUserAdmin(): boolean{
+    const token = localStorage.getItem("currentUser");
+    const payload = JSON.parse(window.atob(token.split('.')[1]));
+    if(payload.rechten == "admin"){
+      return true;
+    }
+    return false;
+  }
   login(username: string, password: string): Observable<boolean> {
     return this.http.post(`${this._url}/login`, { username, password }).pipe(
       map((res: any) => {
