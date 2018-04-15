@@ -15,6 +15,7 @@ export class NieuwsAanpassenComponent implements OnInit {
   private _nieuwsbericht: Nieuwsbericht;
   private _orgineelNieuwsbericht: Nieuwsbericht;
   private nieuwsberichtForm: FormGroup;
+  private _aanpassenComplete: Boolean = false;
   
   constructor(private nds: NieuwsDataService, private fb: FormBuilder, private route: ActivatedRoute) { 
 
@@ -36,9 +37,7 @@ export class NieuwsAanpassenComponent implements OnInit {
   onSubmit(){
     this._nieuwsbericht.titel = this.nieuwsberichtForm.get('titel').value;
     this._nieuwsbericht.bericht = this.nieuwsberichtForm.get('bericht').value;
-    this.nds.pasNieuwsberichtAan(this._nieuwsbericht).subscribe(sub => {
-      document.getElementById("message").style.display = "block"
-    });
+    this.nds.pasNieuwsberichtAan(this._nieuwsbericht).subscribe(sub => this._aanpassenComplete = true);
 
   }
   onReset(){
@@ -54,7 +53,7 @@ export class NieuwsAanpassenComponent implements OnInit {
       }
     }
   }
-  closeMessage(){
-    document.getElementById("message").style.display = "none";
+  get aanpassenComplete(){
+    return this._aanpassenComplete;
   }
 }

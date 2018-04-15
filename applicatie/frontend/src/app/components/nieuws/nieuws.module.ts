@@ -22,6 +22,7 @@ const nieuwsRoutes: Routes = [
         canActivate: [AdminGuard]},
     {path: 'nieuws/wijzig/:nieuwsberichtID', 
         component: NieuwsAanpassenComponent, 
+        canActivate: [AdminGuard],
         resolve: { nieuwsbericht: NieuwsberichtResolver}},
     {path: 'nieuws/:nieuwsberichtID', 
         component: NieuwsDetailComponent, 

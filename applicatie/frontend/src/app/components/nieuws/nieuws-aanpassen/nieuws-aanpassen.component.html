@@ -1,29 +1,32 @@
 <div class="ui top attached message overzicht">
     <div class="ui tiny header">Nieuwsbericht aanpassen</div>
 </div>
-<div class="ui attached message"> 
+<div class="ui positive attached message" *ngIf="aanpassenComplete">
+    <div class="header">Nieuwsbericht succesvol aangepast.</div>
+    <a href="nieuws/{{nieuwsbericht.id}}">Naar het bericht</a>
+</div> 
+<div class="ui attached message" *ngIf="!aanpassenComplete">
     <form [formGroup]='nieuwsberichtForm' (ngSubmit)='onSubmit()' class="ui mini form">
         <p>Gebruik onderstaand formulier om een nieuwsbericht aan te passen.</p>
-        <div class="ui positive message hidden" id="message">
-            <i class="close icon" (click)="closeMessage()"></i>
-            <div class="header">Nieuwsbericht succesvol aangepast.</div>
-        </div>
         <div class="field">
             <label for="titel">Titel:</label> 
             <input id="titel" name="titel" formControlName='titel'>
+            <div class='ui pointing red basic mini label' *ngIf='nieuwsberichtForm.get("titel").errors?.minlength && nieuwsberichtForm.get("titel").touched'>
+                Dit veld is verplicht
+            </div>
         </div>
         <div class="field">
             <label for="bericht">Bericht:</label> 
             <textarea id="bericht" name="bericht" formControlName='bericht'></textarea>
+            <div class='ui pointing red basic mini label' *ngIf='nieuwsberichtForm.get("bericht").errors?.minlength && nieuwsberichtForm.get("bericht").touched'>
+                    Dit veld is verplicht
+            </div>
         </div>
         <div class="field">
-            <button class="ui mini green button" type="submit">Aanpassen</button> 
+            <button class="ui mini green button" type="submit" [disabled]="!nieuwsberichtForm.valid">Aanpassen</button> 
             <a  class="ui mini orange button" (click)="onReset()">Herstel</a>
             <button class="ui mini red button" (click)="verwijderNieuwsbericht()">Verwijder</button>
             <a href="nieuws/{{nieuwsbericht.id}}" class="ui mini blue button">Terug</a>
-        </div>
-        <div *ngIf='nieuwsberichtForm.get("titel").errors?.minlength && nieuwsberichtForm.get("titel").touched'  class='ui pointing red basic label'>
-            error! this is required
         </div>
     </form>
 </div>

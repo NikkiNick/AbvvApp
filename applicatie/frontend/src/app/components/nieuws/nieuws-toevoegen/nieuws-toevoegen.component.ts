@@ -14,6 +14,7 @@ import { AuthenticationService } from '../../../auth/authentication.service';
 export class NieuwsToevoegenComponent implements OnInit {
 
   private nieuwsberichtForm: FormGroup;
+  private _toevoegenComplete: Boolean = false;
 
   constructor(private _nieuwsDataService: NieuwsDataService, private fb: FormBuilder, private authService: AuthenticationService){
   }
@@ -27,9 +28,9 @@ export class NieuwsToevoegenComponent implements OnInit {
     const nieuwsbericht = new Nieuwsbericht(this.nieuwsberichtForm.value.titel, this.nieuwsberichtForm.value.bericht, this.authService.user$.getValue());
     this._nieuwsDataService.voegNieuwsberichtToe(nieuwsbericht)
       .subscribe(
-        sub => document.getElementById("message").style.display = "block");
+        sub => this._toevoegenComplete = true);
   }
-  closeMessage(){
-    document.getElementById("message").style.display = "none";
+  get toevoegenComplete(){
+    return this._toevoegenComplete;
   }
 }
