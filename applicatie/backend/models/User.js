@@ -10,7 +10,7 @@ let UserSchema = new mongoose.Schema({
     voornaam: String,
     email: String, 
     personeelsnummer: Number,
-    rechten: String
+    admin: Boolean
 });
 
 UserSchema.methods.setPassword = function (password) {
@@ -29,7 +29,7 @@ UserSchema.methods.generateJWT = function () {
         _id: this._id,
         username: this.username,
         exp: parseInt(exp.getTime() / 1000),
-        rechten: this.rechten
+        admin: this.admin
     },  process.env.ABVV_BACKEND_SECRET);
   };
 mongoose.model('User', UserSchema);

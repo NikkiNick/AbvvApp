@@ -20,6 +20,7 @@ import { LoginComponent } from './components/user/login/login.component';
 import { AuthGuardService } from './auth/auth-guard.service';
 import { NoAccesComponent } from './components/errors/no-acces/no-acces.component';
 import { AdminModule } from './components/admin/admin.module';
+import { NoRightsComponent } from './components/errors/no-rights/no-rights.component';
 
 
 const appRoutes: Routes = [
@@ -29,6 +30,7 @@ const appRoutes: Routes = [
   {path:'links', component: LinksComponent},
   {path:'downloads', component: DownloadsComponent},
   {path: '401', component: NoAccesComponent},
+  {path: '403', component: NoRightsComponent},
   {path: '404', component: PageNotFoundComponent},
   {path: '**', redirectTo: '/404'}
 ];
@@ -52,7 +54,8 @@ const appRoutes: Routes = [
     LinksComponent,
     DownloadsComponent,
     LoginComponent,
-    NoAccesComponent
+    NoAccesComponent,
+    NoRightsComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

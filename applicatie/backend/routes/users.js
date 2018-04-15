@@ -21,7 +21,7 @@ router.post('/registreer', function(req, res, next) {
   user.voornaam = req.body.voornaam;
   user.email = req.body.email;
   user.personeelsnummer = req.body.personeelsnummer;
-  user.rechten = 'lid';
+  user.admin = false;
   user.setPassword(req.body.password);
   user.save(function(err) {
     if (err) { return next(err); }

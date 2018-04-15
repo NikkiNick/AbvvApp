@@ -40,10 +40,10 @@ export class AuthenticationService {
     this._redirectUrl = value;
   }
   isUserAdmin(): boolean{
-    const token = localStorage.getItem("currentUser");
-    const payload = JSON.parse(window.atob(token.split('.')[1]));
-    if(payload.rechten == "admin"){
-      return true;
+    if(this._user$.getValue()){
+      const token = localStorage.getItem("currentUser");
+      const payload = parseJwt(token);
+      return payload.admin;
     }
     return false;
   }
