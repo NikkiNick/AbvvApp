@@ -4,8 +4,8 @@
   </div>
   <div class="ui attached message">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="ui mini form">
-      <div class="ui red message" *ngIf="errorMsg">
-        Error: {{errorMsg}}
+      <div class="ui red compact message" *ngIf="errorMsg">
+        {{errorMsg}}
       </div>
       <div class="field">
         <label for="loginUsername">Gebruikersnaam:</label>

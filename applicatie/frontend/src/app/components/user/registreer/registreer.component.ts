@@ -25,7 +25,9 @@ function comparePasswords(control: AbstractControl): { [key: string]: any } {
   styleUrls: ['./registreer.component.css']
 })
 export class RegistreerComponent implements OnInit {
+
   private errorMsg: string;
+  private _registerComplete: boolean = false;
   private registerForm: FormGroup;
 
   constructor(private fb: FormBuilder, private authenticationService: AuthenticationService, private router: Router){}
@@ -95,9 +97,10 @@ export class RegistreerComponent implements OnInit {
         this.registerForm.value.personeelsnummer,
         this.registerForm.get("passwordGroup").value.password)
       .subscribe(
-        val => {
-          if (val) {
-            this.router.navigate(['/home']);
+        reg => {
+          if (reg) {
+            this._registerComplete = true;
+            //this.router.navigate(['/home']);
           }
         },
         (error: HttpErrorResponse) => {
@@ -106,7 +109,11 @@ export class RegistreerComponent implements OnInit {
         }
     ); 
   } 
-  closeMessage(){
-    document.getElementById("message").style.display = "none";
+  closeRegisteredMessage(){
+    this._registerComplete = false;
+    this.router.navigate(['/home']);
+  }
+  get isRegistered(): boolean{
+    return this._registerComplete;
   }
 }

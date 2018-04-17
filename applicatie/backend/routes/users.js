@@ -29,10 +29,11 @@ router.post('/registreer', function(req, res, next) {
   user.email = req.body.email;
   user.personeelsnummer = req.body.personeelsnummer;
   user.admin = false;
+  user.active = false;
   user.setPassword(req.body.password);
   user.save(function(err) {
     if (err) { return next(err); }
-    return res.json({ token: user.generateJWT() });
+    return res.json({"registered": true});
   });
 });
 
@@ -43,6 +44,7 @@ router.post('/login', function(req, res, next){
   }
   passport.authenticate('local', function(err, user, info){
     if(err){ return next(err); }
+    if(!user.active){ return res.status(400).json({ message: '"Deze gebruik is nog niet geactiveerd"' })}
     if(user){
       return res.json({token: user.generateJWT()});
     } else {
@@ -106,6 +108,23 @@ router.delete('/verwijder/:userID', function(req, res) {
   req.user.remove(function(err) {
     if (err) { return next(err);}
     res.json({"deleted": true});
+  });
+});
+
+// gebruiker activeren
+router.put('/activeer/:userID', function(req, res) {
+  req.user.active = true;
+  req.user.save(function(err) {
+    if (err) { return next(err);}
+    res.json({"activated": true});
+  });
+});
+// gebruiker deactiveren
+router.put('/deactiveer/:userID', function(req, res) {
+  req.user.active = false;
+  req.user.save(function(err) {
+    if (err) { return next(err);}
+    res.json({"deactivated": true});
   });
 });
 module.exports = router;

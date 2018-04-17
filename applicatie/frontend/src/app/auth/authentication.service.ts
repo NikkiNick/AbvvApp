@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { User } from '../classes/user';
 
@@ -49,30 +49,24 @@ export class AuthenticationService {
   }
   login(username: string, password: string): Observable<boolean> {
     return this.http.post(`${this._url}/login`, { username, password }).pipe(
-      map((res: any) => {
-        const token = res.token;
-        if (token) {
-          localStorage.setItem(this._tokenKey, token);
-          this._user$.next(username);
-          return true;
-        } else {
-          return false;
-        }
-      })
-    );
+      map(
+        (res: any) => {
+            const token = res.token;
+            if (token) {
+              localStorage.setItem(this._tokenKey, token);
+              this._user$.next(username);
+              return true;
+            } else {
+              return false;
+            }
+        },
+        (err: HttpErrorResponse) => { 
+          return false; 
+        }));
   }
   register(username: string, naam: string, voornaam: string, email: string, personeelsnummer: number, password: string): Observable<boolean> {
     return this.http.post(`${this._url}/registreer`, { username, naam, voornaam, email, personeelsnummer, password }).pipe(
-      map((res: any) => {
-        const token = res.token;
-        if (token) {
-          localStorage.setItem(this._tokenKey, token);
-          this._user$.next(username);
-          return true;
-        } else {
-          return false;
-        }
-      })
+      map((reg: any) => { return reg.registered;} )
     );
   }
   logout() {
@@ -135,7 +129,20 @@ export class AuthenticationService {
       return val.deleted;
     }));
   }
-
+  activeerUser(id: String): Observable<boolean>{
+    return this.http
+    .put(`${this._url}/activeer/${id}`, id)
+    .pipe(map((val: any) => {
+      return val.activated;
+    }));
+  }
+  deactiveerUser(id: String): Observable<boolean>{
+    return this.http
+    .put(`${this._url}/deactiveer/${id}`, id)
+    .pipe(map((val: any) => {
+      return val.deactivated;
+    }));
+  }
 }
 
 function parseJwt(token) {

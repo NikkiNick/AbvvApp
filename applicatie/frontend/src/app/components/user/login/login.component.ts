@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -49,9 +50,8 @@ export class LoginComponent implements OnInit {
             }
           }
         }, 
-        err =>  {
-          this.errorMsg = "Probleem bij het inloggen";
-          console.log(err.status+" - "+err.message);
+        (err: HttpErrorResponse) =>  {
+          this.errorMsg = err.error.message;
         });
   }
   logOut(){
