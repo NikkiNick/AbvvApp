@@ -6,10 +6,17 @@ let User = mongoose.model("User");
 
 let passport = require("passport");
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+//User parameter
+router.param('userID', function(req, res, next, id) {
+  let query = User.findById(id);
+  query.exec(function (err, user){
+    if (err) { return next(err); }
+    if (!user) { return next(new Error('Gebruiker ('+id+') niet gevonden!')); }
+    req.user = user;
+    return next();
+  });
+}); 
+
 // REGISTREER
 router.post('/registreer', function(req, res, next) {
   if (!req.body.username || !req.body.password || !req.body.naam || !req.body.voornaam || !req.body.email || !req.body.personeelsnummer) {
@@ -84,6 +91,21 @@ router.get('/:username', function(req, res, next) {
     if (err) { return next(err); }
     if (!user) { return next(new Error('Gebruiker [' + req.params.username +'] niet gevonden')); }
     res.json(user);
+  });
+});
+
+router.get('/', function(req, res, next) {
+  let query = User.find();
+  query.exec(function(err, users) {
+    if (err) { return next(err); }
+    res.json(users);
+  });
+});
+
+router.delete('/verwijder/:userID', function(req, res) {
+  req.user.remove(function(err) {
+    if (err) { return next(err);}
+    res.json({"deleted": true});
   });
 });
 module.exports = router;

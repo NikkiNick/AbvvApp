@@ -1,3 +1,31 @@
-<p>
-  overzicht-gebruikers works!
-</p>
+<div class="ui message">
+    <div class="header">Gebruikers</div>
+    <div class="ui hidden divider"></div>
+    Hieronder een overzicht van de gebruikers
+</div>
+<div class="ui attached positive message" *ngIf="isDeleted">
+  <i class="close icon" (click)="closeDeletedMessage()"></i>
+  Gebruiker verwijderd
+</div>
+<table class="ui red fixed table">
+  <thead>
+    <tr>
+      <th style="width: 40%;">Naam</th>
+      <th style="width: 20%;">Personeelsnummer</th>
+      <th class="center aligned" style="width: 40%;">Acties</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+        <td>{{user.naam}} {{user.voornaam}} ({{user.username}})</td>
+        <td class="bericht">{{user.personeelsnummer}}</td>
+        <td class="center aligned">
+          <i class="trash icon" title="Verwijder gebruiker" (click)="verwijderGebruiker(user.id)"></i>
+          <i class="thumbs up icon" title="Activeer gebruiker"></i>
+        </td>
+    </tr>
+    <tr *ngIf="isEmpty">
+      <td colspan="3">Geen gebruikers</td>
+    </tr>
+  </tbody>
+</table>

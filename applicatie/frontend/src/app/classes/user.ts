@@ -1,4 +1,5 @@
 export class User {
+    private _id: string;
     private _username: string;
     private _naam: string;
     private _voornaam: string;
@@ -7,7 +8,8 @@ export class User {
     private _admin: boolean;
 
     ///CONSTRUCTOR
-    constructor(username: string, naam: string, voornaam: string, email:string, personeelsnummer: Number, admin:boolean){
+    constructor(id: string, username: string, naam: string, voornaam: string, email:string, personeelsnummer: Number, admin:boolean){
+        this._id = id;
         this._username = username;
         this._naam = naam;
         this._voornaam = voornaam;
@@ -17,6 +19,9 @@ export class User {
     }
 
     ///GETTERS
+    get id(): string{
+        return this._id;
+    }
     get username(): string{
         return this._username;
     }
@@ -36,7 +41,7 @@ export class User {
         return this._admin;
     }
     static fromJSON(json: any): User {
-        let user = new User(json.username, json.naam, json.voornaam, json.email, json.personeelsnummer, json.admin);
+        let user = new User(json._id, json.username, json.naam, json.voornaam, json.email, json.personeelsnummer, json.admin);
         return user;
     }
 }

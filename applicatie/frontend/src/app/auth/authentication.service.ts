@@ -119,6 +119,22 @@ export class AuthenticationService {
         .get(`${this._url}/${username}`)
         .pipe(map(User.fromJSON));
   }
+  get users(): Observable<User[]>{
+    return this.http
+              .get(this._url)
+              .pipe(
+                map((list: any[]): User[] =>
+                        list.map(User.fromJSON)
+                )
+              );
+  }
+  verwijderUser(id: String): Observable<boolean>{
+    return this.http
+    .delete(`${this._url}/verwijder/${id}`)
+    .pipe(map((val: any) => {
+      return val.deleted;
+    }));
+  }
 
 }
 
