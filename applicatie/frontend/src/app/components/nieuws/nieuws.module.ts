@@ -11,6 +11,7 @@ import { NieuwsDetailComponent } from "./nieuws-detail/nieuws-detail.component";
 import { NieuwsDataService } from "./service/nieuws-data.service";
 import { NieuwsberichtResolver } from "./nieuwsbericht-resolver";
 import { AdminGuard } from "../../auth/admin.guard";
+import { basehttpInterceptorProviders } from "../../http-interceptors";
 
 
 
@@ -43,6 +44,7 @@ const nieuwsRoutes: Routes = [
         NieuwsDetailComponent
       ],
     providers: [
+        basehttpInterceptorProviders,
         NieuwsDataService,
         NieuwsberichtResolver,
     ]

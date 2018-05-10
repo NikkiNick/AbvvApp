@@ -17,10 +17,11 @@ import { DownloadsComponent } from './components/downloads/downloads.component';
 import { NieuwsModule } from './components/nieuws/nieuws.module';
 import { UserModule } from './components/user/user.module';
 import { LoginComponent } from './components/user/login/login.component';
-import { AuthGuardService } from './auth/auth-guard.service';
+import { AuthGuard } from './auth/auth.guard';
 import { NoAccesComponent } from './components/errors/no-acces/no-acces.component';
 import { AdminModule } from './components/admin/admin.module';
 import { NoRightsComponent } from './components/errors/no-rights/no-rights.component';
+import { BaseUrlInterceptor } from './http-interceptors/base-url.interceptors';
 
 
 const appRoutes: Routes = [
@@ -55,7 +56,7 @@ const appRoutes: Routes = [
     DownloadsComponent,
     LoginComponent,
     NoAccesComponent,
-    NoRightsComponent
+    NoRightsComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

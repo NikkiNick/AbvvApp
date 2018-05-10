@@ -8,6 +8,7 @@ import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './../../auth/auth.guard';
 import { ProfielAanpassenComponent } from './profiel-aanpassen/profiel-aanpassen.component';
+import { basehttpInterceptorProviders } from '../../http-interceptors';
 
 
 const userRoutes: Routes = [
@@ -27,6 +28,7 @@ const userRoutes: Routes = [
     ProfielAanpassenComponent
   ],
   providers: [
+    basehttpInterceptorProviders,
     AuthenticationService,
     AuthGuard
   ]

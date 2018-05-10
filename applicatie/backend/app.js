@@ -1,6 +1,6 @@
 //database verbinding
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/abvv_db');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/abvv_db');
 
 // passport
 let passport = require('passport');
@@ -23,7 +23,8 @@ var users = require('./routes/users');
 
 
 var app = express();
-
+let cors = require('cors');
+app.use(cors({origin: "*"}));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

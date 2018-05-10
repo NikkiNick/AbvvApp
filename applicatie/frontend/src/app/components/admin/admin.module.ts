@@ -4,6 +4,7 @@ import { OverzichtGebruikersComponent } from './overzicht-gebruikers/overzicht-g
 import { Routes, RouterModule } from '@angular/router';
 import { AdminGuard } from './../../auth/admin.guard';
 import { FilterNonActiveUsersPipe } from "./../../filters/filter-non-active-users/filter-non-active-users.pipe";
+import { basehttpInterceptorProviders } from '../../http-interceptors';
 
 const adminRoutes: Routes = [
   {path: 'admin/overzicht-gebruikers', component: OverzichtGebruikersComponent, canActivate: [AdminGuard]}
@@ -19,7 +20,9 @@ const adminRoutes: Routes = [
     OverzichtGebruikersComponent,
     FilterNonActiveUsersPipe
   ],
-  providers: [AdminGuard]
+  providers: [
+    basehttpInterceptorProviders,
+    AdminGuard]
 })
 export class AdminModule { 
 
