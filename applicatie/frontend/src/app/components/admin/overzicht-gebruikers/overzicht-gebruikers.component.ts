@@ -6,7 +6,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-overzicht-gebruikers',
   templateUrl: './overzicht-gebruikers.component.html',
-  styleUrls: ['./overzicht-gebruikers.component.css']
+  styleUrls: ['./overzicht-gebruikers.component.css'],
+  providers: [AuthenticationService]
 })
 export class OverzichtGebruikersComponent implements OnInit {
 

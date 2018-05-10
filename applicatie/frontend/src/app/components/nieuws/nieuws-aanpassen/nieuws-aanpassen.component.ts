@@ -8,7 +8,8 @@ import { Observable } from 'rxjs/Observable';
 @Component({
   selector: 'app-nieuws-aanpassen',
   templateUrl: './nieuws-aanpassen.component.html',
-  styleUrls: ['./nieuws-aanpassen.component.css']
+  styleUrls: ['./nieuws-aanpassen.component.css'],
+  providers: [NieuwsDataService]
 })
 export class NieuwsAanpassenComponent implements OnInit {
 
@@ -23,8 +24,8 @@ export class NieuwsAanpassenComponent implements OnInit {
 
   ngOnInit() {
 
-    this.route.data.subscribe(item => 
-      this._nieuwsbericht = item['nieuwsbericht']);
+    this.route.data.subscribe(item => this._nieuwsbericht = item['nieuwsbericht']);
+
     this._orgineelNieuwsbericht = this._nieuwsbericht;
 
     this.nieuwsberichtForm = this.fb.group({

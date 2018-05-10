@@ -12,6 +12,7 @@ export class LinksComponent implements OnInit {
    }
 
   ngOnInit() {
+    console.log()
   }
 
 }

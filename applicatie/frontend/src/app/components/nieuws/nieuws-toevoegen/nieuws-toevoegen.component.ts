@@ -9,7 +9,7 @@ import { AuthenticationService } from '../../../auth/authentication.service';
   selector: 'app-nieuws-toevoegen',
   templateUrl: './nieuws-toevoegen.component.html',
   styleUrls: ['./nieuws-toevoegen.component.css'],
-  providers: []
+  providers: [NieuwsDataService]
 })
 export class NieuwsToevoegenComponent implements OnInit {
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthGuardService } from './../../../auth/auth-guard.service';
+import { AuthGuard } from './../../../auth/auth.guard';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './../../../auth/authentication.service';
 import { User } from '../../../classes/user';
@@ -12,7 +12,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [AuthenticationService]
 })
 export class LoginComponent implements OnInit {
 

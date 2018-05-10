@@ -3,17 +3,19 @@ import { NieuwsDataService } from '../service/nieuws-data.service';
 import { Nieuwsbericht } from '../../../classes/nieuwsbericht';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { AuthenticationService } from '../../../auth/authentication.service';
 
 @Component({
   selector: 'app-nieuws-detail',
   templateUrl: './nieuws-detail.component.html',
-  styleUrls: ['./nieuws-detail.component.css']
+  styleUrls: ['./nieuws-detail.component.css'],
+  providers: [AuthenticationService, NieuwsDataService]
 })
 export class NieuwsDetailComponent implements OnInit {
 
   private _nieuwsbericht: Nieuwsbericht;
 
-  constructor(private nds: NieuwsDataService, private route: ActivatedRoute) { 
+  constructor(private nds: NieuwsDataService, private route: ActivatedRoute, private authService: AuthenticationService) { 
 
   }
   ngOnInit() {
@@ -30,5 +32,9 @@ export class NieuwsDetailComponent implements OnInit {
   }
   get nieuwsbericht(){
     return this._nieuwsbericht;
+  }
+
+  get isUserAdmin(): boolean{
+    return this.authService.isUserAdmin();
   }
 }

@@ -8,7 +8,7 @@ import { AuthenticationService } from '../../../auth/authentication.service';
   selector: 'app-nieuws',
   templateUrl: './nieuws.component.html',
   styleUrls: ['./nieuws.component.css'],
-  providers: []
+  providers: [NieuwsDataService, AuthenticationService]
 })
 export class NieuwsComponent implements OnInit {
 

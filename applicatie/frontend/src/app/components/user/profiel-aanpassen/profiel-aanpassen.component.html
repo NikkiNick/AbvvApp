@@ -1,0 +1,62 @@
+<div class="ui top attached message overzicht">
+  <div class="ui tiny header">Profiel aanpassen</div>
+</div>
+<div class="ui positive attached message" *ngIf="isChanged">
+  <i class="close icon" (click)="closeMessage()"></i>
+      <div class="header">Profiel succesvol aangepast.</div>
+</div>
+<div class="ui attached message" *ngIf="!isChanged"> 
+  <form (ngSubmit)='onSubmit()' class="ui mini form" [formGroup]='profileForm'>
+      <div class="field">
+          <label for="username">Gebruikersnaam:</label>
+          <input type="text" id="username" formControlName='username'>
+          <div class='ui pointing red basic mini label' *ngIf='profileForm.get("username").errors?.userAlreadyExists && profileForm.get("username").touched'>
+              Deze gebruikersnaam is al in gebruik
+          </div>
+          <div class='ui pointing red basic mini label' *ngIf='profileForm.get("username").errors?.required && profileForm.get("username").touched'>
+              Dit veld is verplicht
+          </div>
+      </div>
+      <div class="two fields">
+          <div class="field">
+                  <label for="naam">Naam:</label>
+                  <input type="text" id="naam" formControlName='naam'>
+                  <div class='ui pointing red basic mini label' *ngIf='profileForm.get("naam").errors?.required && profileForm.get("naam").touched'>
+                          Dit veld is verplicht
+                  </div>
+          </div>
+          <div class="field">
+                  <label for="voornaam">Voornaam:</label>
+                  <input type="text" id="voornaam" formControlName='voornaam'>
+                  <div class='ui pointing red basic mini label' *ngIf='profileForm.get("voornaam").errors?.required && profileForm.get("voornaam").touched'>
+                          Dit veld is verplicht
+                  </div>
+          </div>
+      </div>
+      <div class="field">
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" formControlName="email">
+          <div class='ui pointing red basic mini label' *ngIf='profileForm.get("email").errors?.emailAlreadyExists && profileForm.get("email").touched'>
+              Dit emailadres is al in gebruik
+          </div>
+          <div class='ui pointing red basic mini label' *ngIf='profileForm.get("email").errors?.required && profileForm.get("email").touched'>
+                  Dit veld is verplicht
+          </div>
+      </div>
+      <div class="field">
+          <label for="personeelsnummer">Personeelsnummer:</label>
+          <input type="number" min="0" max="999999" id="personeelsnummer" formControlName="personeelsnummer">
+          <div class='ui pointing red basic mini label' *ngIf='profileForm.get("personeelsnummer").errors?.personeelsnummerAlreadyExists && profileForm.get("personeelsnummer").touched'>
+              Dit personeelsnummer is al in gebruik
+          </div>
+          <div class='ui pointing red basic mini label' *ngIf='profileForm.get("personeelsnummer").errors?.required && profileForm.get("personeelsnummer").touched'>
+                  Dit veld is verplicht
+          </div>
+      </div>
+      <div class="ui divider hidden"></div>
+      <div class="ui container">
+          <button class="ui mini green button" type="submit" [disabled]="!profileForm.valid">Aanpassen</button> 
+          <button  class="ui mini orange button" type="reset">Herstel</button>
+      </div>
+  </form>
+</div>

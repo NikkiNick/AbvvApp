@@ -127,4 +127,17 @@ router.put('/deactiveer/:userID', function(req, res) {
     res.json({"deactivated": true});
   });
 });
+
+//profiel aanpassen
+router.put('/wijzig/:userID', function(req, res) {
+  req.user.username = req.body.username;
+  req.user.naam = req.body.naam;
+  req.user.voornaam = req.body.voornaam;
+  req.user.email = req.body.email;
+  req.user.personeelsnummer = req.body.personeelsnummer;
+  req.user.save(function(err) {
+    if (err) { return next(err);}
+    res.json({"changed": true});
+  });
+});
 module.exports = router;

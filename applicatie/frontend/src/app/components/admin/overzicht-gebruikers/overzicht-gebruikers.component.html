@@ -1,7 +1,10 @@
 <div class="ui message">
     <div class="header">Gebruikers</div>
     <div class="ui hidden divider"></div>
-    Hieronder een overzicht van de gebruikers
+    Hieronder een overzicht van de gebruikers<br>
+    <br>
+    <label for="filterNonActive">Filter niet-geactiveerde gebruikers</label>
+    <input type="checkbox" #filter name="filterNonActive">
 </div>
 <div class="ui attached positive message" *ngIf="isDeleted">
   <i class="close icon" (click)="closeMessage()"></i>
@@ -18,13 +21,13 @@
 <table class="ui red fixed table">
   <thead>
     <tr>
-      <th style="width: 40%;">Naam</th>
-      <th style="width: 20%;">Personeelsnummer</th>
-      <th class="center aligned" style="width: 40%;">Acties</th>
+      <th style="width: 60%;">Naam</th>
+      <th style="width: 20%;">PersNR.</th>
+      <th class="center aligned" style="width: 20%;">Acties</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let user of users">
+    <tr *ngFor="let user of users | filterNonActiveUsers: filterNonActive">
         <td>{{user.naam}} {{user.voornaam}} ({{user.username}})</td>
         <td class="bericht">{{user.personeelsnummer}}</td>
         <td class="center aligned">

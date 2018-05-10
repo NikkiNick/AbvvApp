@@ -69,6 +69,11 @@ export class AuthenticationService {
       map((reg: any) => { return reg.registered;} )
     );
   }
+  pasProfielAan(username: string, naam: string, voornaam: string, email: string, personeelsnummer: number): Observable<boolean> {
+    return this.http.post(`${this._url}/wijzig/`, { username, naam, voornaam, email, personeelsnummer}).pipe(
+      map((res: any) => { return res.changed;} )
+    );
+  }
   logout() {
     if (this.user$.getValue()) {
       localStorage.removeItem('currentUser');

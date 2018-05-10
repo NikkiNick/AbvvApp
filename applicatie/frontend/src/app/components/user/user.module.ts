@@ -6,11 +6,13 @@ import { LoginComponent } from './login/login.component';
 import { AuthenticationService } from './../../auth/authentication.service';
 import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AuthGuardService } from './../../auth/auth-guard.service';
+import { AuthGuard } from './../../auth/auth.guard';
+import { ProfielAanpassenComponent } from './profiel-aanpassen/profiel-aanpassen.component';
 
 
 const userRoutes: Routes = [
-  {path: 'gebruiker/registreer', component: RegistreerComponent}
+  {path: 'gebruiker/registreer', component: RegistreerComponent},
+  {path: 'gebruiker/profiel/wijzig', component: ProfielAanpassenComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
@@ -21,11 +23,12 @@ const userRoutes: Routes = [
     RouterModule.forChild(userRoutes)
   ],
   declarations: [
-    RegistreerComponent
+    RegistreerComponent,
+    ProfielAanpassenComponent
   ],
   providers: [
     AuthenticationService,
-    AuthGuardService
+    AuthGuard
   ]
 })
 export class UserModule { }

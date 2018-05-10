@@ -7,6 +7,9 @@ let Nieuwsbericht = mongoose.model('Nieuwsbericht');
 let jwt = require('express-jwt');
 let auth = jwt({secret: process.env.ABVV_BACKEND_SECRET});
 
+
+
+
 //nieuwsbericht parameter
 router.param('nieuwsberichtID', function(req, res, next, id) {
   let query = Nieuwsbericht.findById(id);

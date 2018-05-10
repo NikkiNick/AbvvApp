@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AuthenticationService } from './authentication.service';
 
 @Injectable()
-export class AuthGuardService implements CanActivate {
+export class AuthGuard implements CanActivate {
 
   constructor(private authService: AuthenticationService, private router: Router){}
 
