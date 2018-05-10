@@ -8,7 +8,7 @@
         "start": "node ./bin/www",
         "deploy-backend": "git subtree push --prefix applicatie/backend abvv-backend master",
         "build-frontend": "cd applicatie/frontend && ng build --prod",
-        "commit-build-changes": "git add . && git commit -m 'chore(build): build files'",
+        "commit-build-changes": "git add . && git commit -m \"chore(build): build files\"",
         "deploy-frontend": "npm run build-frontend && npm run copy && npm run commit-build-changes && git subtree push --prefix serve-frontend abvvapp-frontend master",
         "copy": "cpx 'applicatie/frontend/dist/**' serve-frontend/www"
     },
