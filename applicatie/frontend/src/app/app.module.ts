@@ -59,6 +59,6 @@ const appRoutes: Routes = [
     NoRightsComponent,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent] 
 })
 export class AppModule { }
