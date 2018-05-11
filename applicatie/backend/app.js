@@ -2,6 +2,7 @@
 var mongoose = require('mongoose');
 mongoose.connect(process.env.ABVV_DATABASE || 'mongodb://localhost/abvv_db');
 
+
 // passport
 let passport = require('passport');
 require('./config/passport');
