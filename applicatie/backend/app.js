@@ -1,6 +1,7 @@
 //database verbinding
 var mongoose = require('mongoose');
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/abvv_db');
+mongoose.connect(process.env.ABVV_DATABASE || 'mongodb://localhost/abvv_db');
+console.log(process.env);
 
 
 // passport
