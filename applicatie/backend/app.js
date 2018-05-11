@@ -1,7 +1,7 @@
 //database verbinding
 var mongoose = require('mongoose');
 mongoose.connect(process.env.ABVV_DATABASE || 'mongodb://localhost/abvv_db');
-console.log(process.env);
+
 
 
 // passport
@@ -43,6 +43,7 @@ app.use('/API/gebruiker', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
+  console.log(process.env);
   var err = new Error('Error connecting DB - Not Found');
   err.status = 404;
   next(err);
