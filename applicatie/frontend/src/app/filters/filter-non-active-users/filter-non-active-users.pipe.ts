@@ -12,7 +12,7 @@ export class FilterNonActiveUsersPipe implements PipeTransform {
     if(!filter){
       return users;
     }
-    return users.filter(user => user.active == false);
+    return users.filter(user => user.active == filter);
 
   }
 

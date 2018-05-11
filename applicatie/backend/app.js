@@ -43,7 +43,6 @@ app.use('/API/gebruiker', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  console.log(process.env);
   var err = new Error('Error connecting DB - Not Found');
   err.status = 404;
   next(err);
